@@ -9,6 +9,7 @@ package sistemaevento.dtos;
 import java.util.Objects;
 
 import sistemaevento.util.GenericoDTO.Estado;
+import sistemaevento.util.GenericoDTO.Rol;
 
 
 /**
@@ -20,7 +21,7 @@ public class UsuarioDTO {
     private String codigo;
     private String clave;
     private Estado estado; 
-    private Rol tipo;
+    private Rol rol;
 
     public UsuarioDTO() {
     }
@@ -57,12 +58,12 @@ public class UsuarioDTO {
         this.estado = estado;
     }
 
-    public Rol getTipo() {
-        return tipo;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setTipo(Rol tipo) {
-        this.tipo = tipo;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     @Override
@@ -95,29 +96,15 @@ public class UsuarioDTO {
      * @return true si esta bien ingresado false si algun campo q es requerido no esta ingresado
      */
     public boolean validarUsuario(){
-        return id != null && codigo != null && estado != null && clave != null && tipo != null;
+        return id != null && codigo != null && estado != null && clave != null && rol != null;
     }
 
     public boolean validarCampos() {
-        return codigo != null && estado != null && clave != null && tipo != null;
+        return codigo != null && estado != null && clave != null && rol != null;
     }
     
-    public enum Rol{
-        A,//administrador
-        S,//secretaria
-        B; //bodeguero
-        public boolean isAdministrador(){return this== A;}
-        public boolean isBodeguero(){return this== B;}
-        public boolean isSecretaria(){return this== S;}
-    }
     
-    public static Rol StringToRol(String text){
-       if(text.equals("ADMINISTRADOR") || text.equals("A")){
-           return Rol.A;
-       }
-       else if (text.equals("SECRETARIA") || text.equals("S")){
-                return Rol.S;
-           }
-       return Rol.B;
-   }
+    
+    
+  
 }

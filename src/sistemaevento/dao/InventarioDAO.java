@@ -6,6 +6,7 @@ import java.util.List;
 import sistemaevento.dtos.ArticuloDTO;
 import sistemaevento.dtos.ClienteDTO;
 import sistemaevento.dtos.TransporteDTO;
+import sistemaevento.dtos.UsuarioDTO;
 
 public interface InventarioDAO {
 
@@ -16,5 +17,7 @@ public interface InventarioDAO {
 	public List<TransporteDTO> buscarTransporte(TransporteDTO transporteFilter) throws SQLException;
 
 	public List<ClienteDTO> buscarCliente(ClienteDTO clienteFilter) throws SQLException;
+
+	public List<UsuarioDTO> buscarUsuario(UsuarioDTO usuarioFilter) throws SQLException;
 
 }
