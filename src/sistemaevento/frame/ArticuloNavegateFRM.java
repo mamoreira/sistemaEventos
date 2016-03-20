@@ -63,18 +63,14 @@ public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 
 	        //****AGREGAR COMPONENTES****//
 	        nuevoComponente(labelId,textFieldId);
+	        nuevoComponente(labelCodigo,textFieldCodigo);
 	        nuevoComponente(labelStock,textFieldStock);
-//	        panelComponentes.add(labelCodigo);
-//	        panelComponentes.add(textFieldCodigo);
-//	        panelComponentes.add(labelDescripcion);
-//	        panelComponentes.add(textFieldDescripcion);
-//	        panelComponentes.add(labelCantidadReparacion);
-//	        panelComponentes.add(textFieldCantidadReparacion);
-//	        panelComponentes.add(labelPrecioAlquiler);
-//	        panelComponentes.add(labelCosto);
-//	        panelComponentes.add(textFieldCosto);
-//	        panelComponentes.add(labelEstado);
-//	        panelComponentes.add(comboboxEstado);
+	        nuevoComponente(labelDescripcion,textFieldDescripcion);
+	        nuevoComponente(labelCantidadReparacion,textFieldCantidadReparacion);
+	        nuevoComponente(labelPrecioAlquiler,textFieldPrecioAlquiler);
+	        nuevoComponente(labelCosto,textFieldCosto);
+	        nuevoComponente(labelEstado,comboboxEstado);
+     
 	        textFieldId.setText("0");
 	        textFieldId.setEnabled(false);
 
