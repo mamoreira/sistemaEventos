@@ -1,12 +1,10 @@
 package sistemaevento.frame;
 
-import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import sistemaevento.dtos.UsuarioDTO;
@@ -29,7 +27,6 @@ public class UsuarioFRM extends PlantillaFRM {
 	
 
 	private UsuarioDTO UsuarioFilter;
-	private UsuarioDTO Usuario;
     private int filaActual;
     private List<UsuarioDTO> resultados;
     private InputNumber textFieldId;

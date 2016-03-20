@@ -1,6 +1,5 @@
 package sistemaevento.frame;
 
-import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,6 @@ import javax.swing.table.DefaultTableModel;
 import sistemaevento.dtos.TransporteDTO;
 import sistemaevento.plantillas.frame.PlantillaFRM;
 import sistemaevento.util.Combobox;
-import sistemaevento.util.GenericoDTO;
 import sistemaevento.util.InputNumber;
 import sistemaevento.util.InputText;
 
@@ -29,12 +27,10 @@ public class TransporteFRM extends PlantillaFRM {
     private int filaActual;
     private List<TransporteDTO> resultados;
     private InputNumber textFieldId;
-    private JTextField textFieldObservacion;
     private JTextField textFieldPlaca;
     private InputText textFieldDescripcion;
     private Combobox comboboxEstado;
     private JLabel labelId;
-    private JLabel labelObservacion;
     private JLabel labelDescripcion;
     private JLabel labelEstado;
     private JLabel labelPlaca;
@@ -56,12 +52,9 @@ public class TransporteFRM extends PlantillaFRM {
 		//****INICIALIZAR COMPONENTES****//
 		comboboxEstado = TransporteDTO.EstadoTransporteCombobox();
 		textFieldId=new InputNumber(15);
-//		textFieldId.setMaximumSize(new Dimension(5,3));
-		textFieldObservacion= new JTextField(10);
 		textFieldPlaca= new JTextField(10);
 		textFieldDescripcion=new InputText(10);
 		labelId=new JLabel(         "Id : ");
-		labelObservacion=new JLabel(     "Observacion : ");
 		labelDescripcion=new JLabel("Descripcion : ");
 		labelEstado=new JLabel(     "Estado : ");
 		labelPlaca=new JLabel(     "Placa : ");
@@ -106,7 +99,6 @@ public class TransporteFRM extends PlantillaFRM {
         TransporteFilter.setEstadoTransporte(TransporteFilter.StringToEstadoTransporte(comboboxEstado.getSelectedItem().toString()));
         resultados=inventarioG.buscarTransporte(TransporteFilter);
         mostrarTablaResultado(resultados);
-        // first commit
         
     }
     private boolean mostrarTablaResultado(List<TransporteDTO> lista) {

@@ -1,6 +1,5 @@
 package sistemaevento.frame;
 
-import java.awt.GridBagConstraints;
 import java.sql.SQLException;
 
 import javax.swing.JLabel;
@@ -11,7 +10,6 @@ import sistemaevento.plantillas.frame.PlantillaNavegateFRM;
 import sistemaevento.util.Combobox;
 import sistemaevento.util.GenericoDTO;
 import sistemaevento.util.InputNumber;
-import sistemaevento.util.InputText;
 
 public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 
