@@ -1,0 +1,86 @@
+package sistemaevento.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import sistemaevento.conexion.Conexion;
+import sistemaevento.dtos.ArticuloDTO;
+import sistemaevento.util.Criteria;
+import sistemaevento.util.GenericoDTO;
+
+public class InventarioDAOImpl implements InventarioDAO {
+	
+	private Connection userConn;
+
+	public List<ArticuloDTO> buscarArticulo(ArticuloDTO articulo) throws SQLException{
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet datos=null;
+		ArrayList<ArticuloDTO> articulos=new ArrayList<ArticuloDTO>();
+		try{
+			conn=(this.userConn!=null)?this.userConn:Conexion.getConnection();
+			stmt=conn.createStatement();
+			Criteria criteria=new Criteria("articulo");
+            criteria.addEqualsIfNotNull("id",articulo.getId());
+			criteria.addLikeIfNotNull("codigo",articulo.getCodigo());
+            criteria.addLikeIfNotNull("descripcion",articulo.getDescripcion());
+            criteria.addEqualsIfNotNull("estado",articulo.getEstado()); 
+            datos=stmt.executeQuery(criteria.getQuery());
+            while(datos.next()){
+                ArticuloDTO temp=new ArticuloDTO();
+                temp.setId(datos.getLong(1));
+                temp.setCodigo(datos.getString(2));
+                temp.setDescripcion(datos.getString(3));
+                temp.setCosto(datos.getBigDecimal(4));
+                temp.setPrecioAlquiler(datos.getBigDecimal(5));
+                temp.setStock(datos.getLong(6));
+                temp.setCantidadBuenEstado(datos.getLong(7));
+                temp.setCantidadReparacion(datos.getLong(8));
+                temp.setEstado(GenericoDTO.StringToEstado(datos.getString(9)));
+                articulos.add(temp); 
+            }
+		}
+		finally{
+			Conexion.close(stmt);
+			if(this.userConn==null){
+				Conexion.close(conn);
+			}
+		} 
+        return articulos;
+	}
+	public ArticuloDTO obtenerArticuloPorId(Long id) throws SQLException{
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet datos=null;
+		ArticuloDTO articulo=new ArticuloDTO();
+		try{
+			conn=(this.userConn!=null)?this.userConn:Conexion.getConnection();
+			stmt=conn.createStatement();
+			Criteria criteria=new Criteria("articulo");
+            criteria.addEqualsIfNotNull("id",id);
+            datos=stmt.executeQuery(criteria.getQuery());
+            while(datos.next()){
+            	articulo.setId(datos.getLong(1));
+                articulo.setCodigo(datos.getString(2));
+                articulo.setDescripcion(datos.getString(3));
+                articulo.setCosto(datos.getBigDecimal(4));
+                articulo.setPrecioAlquiler(datos.getBigDecimal(5));
+                articulo.setStock(datos.getLong(6));
+                articulo.setCantidadBuenEstado(datos.getLong(7));
+                articulo.setCantidadReparacion(datos.getLong(8));
+                articulo.setEstado(GenericoDTO.StringToEstado(datos.getString(9))); 
+            }
+		}
+		finally{
+			Conexion.close(stmt);
+			if(this.userConn==null){
+				Conexion.close(conn);
+			}
+		} 
+        return articulo;
+	}
+}
