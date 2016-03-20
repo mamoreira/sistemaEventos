@@ -4,16 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import sistemaevento.run.MenuPrincipalFRM;
+import javax.swing.JScrollPane;
 
 public class PlantillaNavegateFRM extends AbstractFRM {
     /**
@@ -27,6 +26,9 @@ public class PlantillaNavegateFRM extends AbstractFRM {
     protected javax.swing.JPanel panelComponentes;
     protected javax.swing.JPanel panelDescripcion;
     protected javax.swing.JPanel panelDatos;
+    private javax.swing.JScrollPane scrollPanel;
+	private JPanel panelLbl;
+	private JPanel panelComp;
     protected String titulo;
     
     public PlantillaNavegateFRM() {
@@ -40,71 +42,90 @@ public class PlantillaNavegateFRM extends AbstractFRM {
          panelBotones = new javax.swing.JPanel();
          panelDescripcion=new javax.swing.JPanel();
          panelDatos = new javax.swing.JPanel();
+         panelLbl=new javax.swing.JPanel();
+         panelComp=new javax.swing.JPanel();
+         scrollPanel=new JScrollPane();
          inicializarExtraComponentes();
          setTitle(titulo);
          this.setSize(new Dimension(400,400) );
          this.setLayout(new BorderLayout());
+         
          panelBotones.setPreferredSize(new Dimension(300,60));
          panelBotones.setLayout(new FlowLayout(FlowLayout.LEFT));
          panelBotones.setBorder(BorderFactory.createTitledBorder("Acciones")); 
-         panelDatos.setLayout(new FlowLayout(FlowLayout.LEFT));
-         panelDatos.setBorder(BorderFactory.createTitledBorder("Datos")); 
+         panelDatos.setLayout(new FlowLayout(FlowLayout.CENTER));
+         scrollPanel.setBorder(BorderFactory.createTitledBorder("Datos")); 
          panelComponentes.setLayout(new FlowLayout(FlowLayout.LEFT));
          panelDescripcion.setLayout(new FlowLayout(FlowLayout.LEFT));
-         
-         
-         buttonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar_icon.png"))); // NOI18N
+ 		 panelLbl.setLayout(new BoxLayout(panelLbl,BoxLayout.Y_AXIS));
+ 		 panelComp.setLayout(new BoxLayout(panelComp,BoxLayout.Y_AXIS));
+ 		 scrollPanel.setPreferredSize(panelDatos.getPreferredSize());
+ 		 
+         buttonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar_icon.png"))); // NOI18N
          buttonGuardar.setText("Guardar");
          buttonGuardar.addActionListener(new java.awt.event.ActionListener() {
              public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                 try {
-// 					accionBuscar(evt);
-// 				} catch (SQLException e) {
-// 					// TODO Auto-generated catch block
-// 					e.printStackTrace();
-// 				}
+                 try {
+ 					accionGuardar();
+ 				} catch (SQLException e) {
+ 					// TODO Auto-generated catch block
+ 					e.printStackTrace();
+ 				}
              }
          });
-         buttonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar_icon.png"))); // NOI18N
+         buttonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/limpiar_icon.png"))); // NOI18N
          buttonLimpiar.setText("Limpiar");
          buttonLimpiar.addActionListener(new java.awt.event.ActionListener() {
              public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                 try {
-// 					accionBuscar(evt);
-// 				} catch (SQLException e) {
-// 					// TODO Auto-generated catch block
-// 					e.printStackTrace();
-// 				}
+                 try {
+ 					accionLimpiar();
+ 				} catch (SQLException e) {
+ 					// TODO Auto-generated catch block
+ 					e.printStackTrace();
+ 				}
              }
          });
-         buttonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar_icon.png"))); // NOI18N
+         buttonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/delete_icon.png"))); // NOI18N
          buttonEliminar.setText("Eliminar");
          buttonEliminar.addActionListener(new java.awt.event.ActionListener() {
              public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                 try {
-// 					accionBuscar(evt);
-// 				} catch (SQLException e) {
-// 					// TODO Auto-generated catch block
-// 					e.printStackTrace();
-// 				}
+                 try {
+ 					accionEliminar();
+ 				} catch (SQLException e) {
+ 					// TODO Auto-generated catch block
+ 					e.printStackTrace();
+ 				}
              }
          });
-         panelBotones.add(buttonGuardar);
-         panelBotones.add(buttonLimpiar);
-         panelBotones.add(buttonEliminar);
-         add(panelBotones,BorderLayout.NORTH);
-         add(panelDatos,BorderLayout.CENTER);
-         setLocationRelativeTo(null);
+ 		panelDatos.add(panelLbl);
+ 		panelDatos.add(panelComp);
+ 		scrollPanel.setViewportView(panelDatos);
+        panelBotones.add(buttonGuardar);
+        panelBotones.add(buttonLimpiar);
+        panelBotones.add(buttonEliminar);
+        add(panelBotones,BorderLayout.NORTH);
+        add(scrollPanel,BorderLayout.CENTER);
+        setLocationRelativeTo(null);
 
     }
+	protected void accionEliminar() throws SQLException{
+		// TODO Auto-generated method stub
+		
+	}
+	protected void accionLimpiar()throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+	protected void accionGuardar() throws SQLException{
+		
+	}
 	protected void inicializarExtraComponentes() {
 		
 	}
 	public void nuevoComponente(JLabel descripcion,Component componente){
-		JPanel panel=new JPanel();
-		panel.setLayout(new BorderLayout());
-		panel.add(descripcion,BorderLayout.WEST);
-		panel.add(componente,BorderLayout.CENTER);
-		panelDatos.add(panel);
+		panelLbl.add(descripcion);
+		panelLbl.add(Box.createVerticalStrut(10));
+		panelComp.add(componente);
+		panelComp.add(Box.createVerticalStrut(5));
 	}
 }

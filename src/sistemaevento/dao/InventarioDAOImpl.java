@@ -9,6 +9,7 @@ import java.util.List;
 
 import sistemaevento.conexion.Conexion;
 import sistemaevento.dtos.ArticuloDTO;
+import sistemaevento.dtos.TransporteDTO;
 import sistemaevento.util.Criteria;
 import sistemaevento.util.GenericoDTO;
 
@@ -83,4 +84,41 @@ public class InventarioDAOImpl implements InventarioDAO {
 		} 
         return articulo;
 	}
+	
+
+	
+	public List<TransporteDTO> buscarTransporte(TransporteDTO articulo) throws SQLException{
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet datos=null;
+		ArrayList<TransporteDTO> articulos=new ArrayList<TransporteDTO>();
+		try{
+			conn=(this.userConn!=null)?this.userConn:Conexion.getConnection();
+			stmt=conn.createStatement();
+			Criteria criteria=new Criteria("vehiculo");
+            criteria.addEqualsIfNotNull("id",articulo.getId());
+			criteria.addLikeIfNotNull("placa",articulo.getPlaca());
+            criteria.addLikeIfNotNull("descripcion",articulo.getDescripcion());
+            criteria.addEqualsIfNotNull("estado",articulo.getEstadoTransporte()); 
+            datos=stmt.executeQuery(criteria.getQuery());
+            while(datos.next()){
+                TransporteDTO temp=new TransporteDTO();
+                temp.setId(datos.getLong(1));
+                temp.setDescripcion(datos.getString(2));
+                temp.setPlaca(datos.getString(3));
+                temp.setObservacion(datos.getString(4));
+                temp.setEstadoTransporte(temp.StringToEstadoTransporte(datos.getString(5)));
+                temp.setAnioCompra(datos.getString(6));
+                articulos.add(temp); 
+            }
+		}
+		finally{
+			Conexion.close(stmt);
+			if(this.userConn==null){
+				Conexion.close(conn);
+			}
+		} 
+        return articulos;
+	}
 }
+

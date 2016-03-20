@@ -52,14 +52,14 @@ public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 	        textFieldCodigo=new JTextField(19);
 	        textFieldDescripcion=new JTextField(19);
 	        textFieldCosto=new JTextField(19);
-	        labelId=new JLabel("Id* ");
-	        labelStock=new JLabel("Stock* ");
-	        labelCantidadReparacion=new JLabel("Cant. Reparacion ");
-	        labelCosto=new JLabel("Costo ");
-	        labelCodigo=new JLabel("Codigo    ");
-	        labelDescripcion=new JLabel("Descripcion    ");
-	        labelEstado=new JLabel("Estado*    ");
-	        labelPrecioAlquiler=new JLabel("Precio Alquier ");
+	        labelId=new JLabel("Id* : ");
+	        labelStock=new JLabel("Stock* : ");
+	        labelCantidadReparacion=new JLabel("Cant. Reparacion : ");
+	        labelCosto=new JLabel("Costo : ");
+	        labelCodigo=new JLabel("Codigo : ");
+	        labelDescripcion=new JLabel("Descripcion : ");
+	        labelEstado=new JLabel("Estado* : ");
+	        labelPrecioAlquiler=new JLabel("Precio Alquier : ");
 
 	        //****AGREGAR COMPONENTES****//
 	        nuevoComponente(labelId,textFieldId);
@@ -69,8 +69,7 @@ public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 	        nuevoComponente(labelCantidadReparacion,textFieldCantidadReparacion);
 	        nuevoComponente(labelPrecioAlquiler,textFieldPrecioAlquiler);
 	        nuevoComponente(labelCosto,textFieldCosto);
-	        nuevoComponente(labelEstado,comboboxEstado);
-     
+	        nuevoComponente(labelEstado,comboboxEstado);	        
 	        textFieldId.setText("0");
 	        textFieldId.setEnabled(false);
 

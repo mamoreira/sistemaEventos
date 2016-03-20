@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -40,6 +42,8 @@ public class PlantillaFRM extends AbstractFRM {
     private javax.swing.JTextField paginacionTxt;
     private javax.swing.JPanel panelBotonesTabla;
     protected javax.swing.JTable tableResultados;
+	private JPanel panelLbl;
+	private JPanel panelComp;
     private JScrollPane scrollPaneFiltros;
     protected static MensajeLbl mensaje;
     protected Object[][] dataTableResult;
@@ -66,23 +70,26 @@ public class PlantillaFRM extends AbstractFRM {
         buttonUltimo = new javax.swing.JButton();
         buttonPrimero = new javax.swing.JButton();
         scrollPaneFiltros = new JScrollPane();
+        panelLbl=new javax.swing.JPanel();
+        panelComp=new javax.swing.JPanel();
         inicializaComponentes();
         
         paginacionTxt.setEditable(false);
         setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth(), MenuPrincipalFRM.tabPanel.getHeight()));
         setLayout(new BorderLayout());
-
-        panelResultados.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-300, MenuPrincipalFRM.tabPanel.getHeight()-200));
+		 panelLbl.setLayout(new BoxLayout(panelLbl,BoxLayout.Y_AXIS));
+		 panelComp.setLayout(new BoxLayout(panelComp,BoxLayout.Y_AXIS));
+        panelResultados.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-330, MenuPrincipalFRM.tabPanel.getHeight()-200));
         panelResultados.setLayout(new FlowLayout(FlowLayout.LEFT));
         panelResultados.setBorder(BorderFactory.createTitledBorder("Resultado de Busqueda")); 
-        panelFiltros.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-850, MenuPrincipalFRM.tabPanel.getHeight()-200));
+        panelFiltros.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-820, MenuPrincipalFRM.tabPanel.getHeight()-200));
         panelFiltros.setLayout(new FlowLayout(FlowLayout.LEADING));
         scrollPaneFiltros.setBorder(BorderFactory.createTitledBorder("Filtros de Busqueda"));
         scrollPaneFiltros.setViewportView(panelFiltros);
         panelBotones.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth(), 60));
         panelBotones.setLayout(new FlowLayout(FlowLayout.LEADING));
         panelBotones.setBorder(BorderFactory.createTitledBorder("Acciones"));
-        panelBotonesTabla.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-300, 50));
+        panelBotonesTabla.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-330, 50));
         panelBotonesTabla.setLayout(new FlowLayout(FlowLayout.RIGHT));
         
         MenuPrincipalFRM.tabPanel.addComponentListener(new ComponentAdapter() {
@@ -90,15 +97,13 @@ public class PlantillaFRM extends AbstractFRM {
                 setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth(), MenuPrincipalFRM.tabPanel.getHeight()));
                 panelBotonesTabla.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-panelFiltros.getWidth()
                 		, panelBotonesTabla.getHeight()));
-                panelResultados.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-300, MenuPrincipalFRM.tabPanel.getHeight()-200));
+                panelResultados.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-330, MenuPrincipalFRM.tabPanel.getHeight()-200));
                 scrollPanelTable.setPreferredSize(panelResultados.getPreferredSize());
-                panelBotonesTabla.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-300, 50));
-                if(panelFiltros.getPreferredSize().getWidth()>225 || MenuPrincipalFRM.tabPanel.getWidth()>1034){
-                	panelFiltros.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-850, MenuPrincipalFRM.tabPanel.getHeight()-200));
-                }
+                panelBotonesTabla.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-330, 50));
+//                if(panelFiltros.getPreferredSize().getWidth()>225 || MenuPrincipalFRM.tabPanel.getWidth()>1034){
+//                	panelFiltros.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-850, MenuPrincipalFRM.tabPanel.getHeight()-200));
+//                }
                 System.out.println(MenuPrincipalFRM.tabPanel.getWidth()-850+":"+ MenuPrincipalFRM.tabPanel.getWidth());
-//                panelResultados.setPreferredSize(new java.awt.Dimension(MenuPrincipalFRM.tabPanel.getWidth()-panelFiltros.getWidth()
-//                		, panelBotonesTabla.getHeight()));
             }
         });
         
@@ -177,7 +182,8 @@ public class PlantillaFRM extends AbstractFRM {
         tableResultados.setPreferredSize(panelResultados.getPreferredSize());
         scrollPanelTable.setPreferredSize(panelResultados.getPreferredSize());
         scrollPanelTable.setViewportView(tableResultados);
-
+ 		panelFiltros.add(panelLbl);
+ 		panelFiltros.add(panelComp);
         panelResultados.add(scrollPanelTable);
         panelResultados.add(panelBotonesTabla);
         mensaje=new MensajeLbl();mensaje.setText("hojjjjjj");
@@ -253,12 +259,10 @@ protected void inicializaComponentes() {
     
     }
     public void nuevoFiltro(Component componente,JLabel descripcion){
-    	JPanel panel=new JPanel();
-		panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		panel.setSize(100,30);
-		panel.add(descripcion);
-		panel.add(componente);
- 	   panelFiltros.add(panel);
+		panelLbl.add(descripcion);
+		panelLbl.add(Box.createVerticalStrut(10));
+		panelComp.add(componente);
+		panelComp.add(Box.createVerticalStrut(5));
     }
 	public static void limpiarTabla(JTable tabla){
 

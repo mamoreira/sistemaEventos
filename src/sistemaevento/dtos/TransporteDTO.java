@@ -9,6 +9,7 @@ package sistemaevento.dtos;
 import java.util.ArrayList;
 
 import sistemaevento.util.Combobox;
+import sistemaevento.util.GenericoDTO.Estado;
 
 /**
  *
@@ -18,9 +19,9 @@ public class TransporteDTO {
     private Long id;
     private String placa;
     private String descripcion;
-    private String observaciones;
+    private String observacion;
     private EstadoTransporte EstadoTransporte;
-    private Long anioCompra;
+    private String anioCompra;
     private PersonaDTO empleado;
     
     public TransporteDTO() {
@@ -51,12 +52,12 @@ public class TransporteDTO {
         this.descripcion = descripcion;
     }
 
-    public String getObservaciones() {
-        return observaciones;
+    public String getObservacion() {
+        return observacion;
     }
 
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
     public PersonaDTO getEmpleado() {
         return empleado;
@@ -70,15 +71,16 @@ public class TransporteDTO {
         return EstadoTransporte;
     }
 
-    public void setEstadoTransporte(EstadoTransporte EstadoTransporte) {
-        this.EstadoTransporte = EstadoTransporte;
+    public void setEstadoTransporte(EstadoTransporte estado) {
+        this.EstadoTransporte = estado;
     }
-
-    public Long getAnioCompra() {
+    
+  
+    public String getAnioCompra() {
         return anioCompra;
     }
 
-    public void setAnioCompra(Long anioCompra) {
+    public void setAnioCompra(String anioCompra) {
         this.anioCompra = anioCompra;
     }
 
@@ -86,21 +88,23 @@ public class TransporteDTO {
         return id!= null && EstadoTransporte !=null ;
     }
 
-    public Combobox EstadoTransporteCombobox(){
+   
+    public static Combobox EstadoTransporteCombobox(){
         String[] rutas={"/Imagenes/activo_icon.png","/Imagenes/inactivo_icon.png","/Imagenes/inactivo_icon.png"}; 
         ArrayList lista=new ArrayList();
         lista.add("ACTIVO");
-        lista.add("INCATIVO");
+        lista.add("INACTIVO");
         lista.add("REPARACION");
         Combobox comboboxEstado = new Combobox(lista.size(), lista, 206,26, rutas);
         return comboboxEstado;
     }
 
+    
     public EstadoTransporte StringToEstadoTransporte(String text) {
         switch (text) {
             case "ACTIVO":
             case "A":
-                return this.EstadoTransporte.A;
+                return EstadoTransporte.A;
             case "INACTIVO":
             case "P":
                 return EstadoTransporte.P;
