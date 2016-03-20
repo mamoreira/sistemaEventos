@@ -14,7 +14,7 @@ import sistemaevento.dtos.ClienteDTO;
 import sistemaevento.dtos.TransporteDTO;
 import sistemaevento.dtos.UsuarioDTO;
 import sistemaevento.util.Criteria;
-import sistemaevento.util.GenericoDTO;
+import sistemaevento.util.Generic;
 
 public class InventarioDAOImpl implements InventarioDAO {
 	
@@ -45,7 +45,7 @@ public class InventarioDAOImpl implements InventarioDAO {
                 temp.setStock(datos.getLong(6));
                 temp.setCantidadBuenEstado(datos.getLong(7));
                 temp.setCantidadReparacion(datos.getLong(8));
-                temp.setEstado(GenericoDTO.StringToEstado(datos.getString(9)));
+                temp.setEstado(Generic.StringToEstado(datos.getString(9)));
                 articulos.add(temp); 
             }
 		}
@@ -77,7 +77,7 @@ public class InventarioDAOImpl implements InventarioDAO {
                 articulo.setStock(datos.getLong(6));
                 articulo.setCantidadBuenEstado(datos.getLong(7));
                 articulo.setCantidadReparacion(datos.getLong(8));
-                articulo.setEstado(GenericoDTO.StringToEstado(datos.getString(9))); 
+                articulo.setEstado(Generic.StringToEstado(datos.getString(9))); 
             }
 		}
 		finally{
@@ -147,7 +147,7 @@ public class InventarioDAOImpl implements InventarioDAO {
                 temp.setCedula(datos.getString(2));
                 temp.setNombres(datos.getString(3));
                 temp.setApellidos(datos.getString(4));
-                temp.setEstado(GenericoDTO.StringToEstado(datos.getString(5)));
+                temp.setEstado(Generic.StringToEstado(datos.getString(5)));
                 articulos.add(temp); 
             }
 		}
@@ -203,7 +203,7 @@ public class InventarioDAOImpl implements InventarioDAO {
             	UsuarioDTO temp=new UsuarioDTO();
                 temp.setId(datos.getLong(1));
                 temp.setCodigo(datos.getString(2));
-                temp.setEstado(GenericoDTO.StringToEstado(datos.getString(4)));
+                temp.setEstado(Generic.StringToEstado(datos.getString(4)));
                 articulos.add(temp); 
             }
 		}

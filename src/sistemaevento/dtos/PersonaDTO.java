@@ -7,7 +7,7 @@
 package sistemaevento.dtos;
 
 import sistemaevento.util.Fecha;
-import sistemaevento.util.GenericoDTO;
+import sistemaevento.util.Generic;
 
 
 
@@ -16,8 +16,7 @@ import sistemaevento.util.GenericoDTO;
  *
  * @author Mayrita
  */
-public class PersonaDTO {
-    private Long id;
+public class PersonaDTO extends GenericoDTO{
     private String cedula;
     private String nombres;
     private String apellidos;
@@ -30,7 +29,7 @@ public class PersonaDTO {
     private boolean cliente;
     private boolean proveedor;
     private boolean empleado;
-    private GenericoDTO.Estado estado;
+    private Generic.Estado estado;
 
     public PersonaDTO (){
     }
@@ -109,11 +108,11 @@ public class PersonaDTO {
         this.nombres = nombres;
     }
 
-    public GenericoDTO.Estado getEstado() {
+    public Generic.Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(GenericoDTO.Estado estado) {
+    public void setEstado(Generic.Estado estado) {
         this.estado = estado;
     }
 

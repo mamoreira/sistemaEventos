@@ -1,18 +1,16 @@
 package sistemaevento.frame;
 
-import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import sistemaevento.dtos.UsuarioDTO;
 import sistemaevento.plantillas.frame.PlantillaFRM;
 import sistemaevento.util.Combobox;
-import sistemaevento.util.GenericoDTO;
+import sistemaevento.util.Generic;
 import sistemaevento.util.InputNumber;
 import sistemaevento.util.InputText;
 
@@ -29,7 +27,6 @@ public class UsuarioFRM extends PlantillaFRM {
 	
 
 	private UsuarioDTO UsuarioFilter;
-	private UsuarioDTO Usuario;
     private int filaActual;
     private List<UsuarioDTO> resultados;
     private InputNumber textFieldId;
@@ -54,7 +51,7 @@ public class UsuarioFRM extends PlantillaFRM {
 		setMinimumSize(new java.awt.Dimension(1000, 599));
 		UsuarioFilter=new UsuarioDTO();
 		//****INICIALIZAR COMPONENTES****//
-		comboboxEstado = GenericoDTO.EstadoCombobox();
+		comboboxEstado = Generic.EstadoCombobox();
 		textFieldId=new InputNumber(15);
 		textFieldCodigo=new InputText(10);
 		labelId=new JLabel(         "Id : ");
@@ -95,7 +92,7 @@ public class UsuarioFRM extends PlantillaFRM {
     	filaActual=0;
         UsuarioFilter.setId(textFieldId.getLong());
         UsuarioFilter.setCodigo(textFieldCodigo.getText());
-        UsuarioFilter.setEstado(GenericoDTO.StringToEstado(comboboxEstado.getSelectedItem().toString()));
+        UsuarioFilter.setEstado(Generic.StringToEstado(comboboxEstado.getSelectedItem().toString()));
         resultados=inventarioG.buscarUsuario(UsuarioFilter);
         mostrarTablaResultado(resultados);
         
@@ -110,7 +107,7 @@ public class UsuarioFRM extends PlantillaFRM {
                 UsuarioDTO dto=lista.get(filaActual);
                 tableResultados.setValueAt(dto.getId(),i,0);                
                 tableResultados.setValueAt(dto.getCodigo(),i,1);
-                tableResultados.setValueAt(GenericoDTO.EstadoToString(dto.getEstado()),i,2);
+                tableResultados.setValueAt(Generic.EstadoToString(dto.getEstado()),i,2);
                 filaActual++;
             }else i=21;
         } 

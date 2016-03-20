@@ -38,11 +38,11 @@ public class Combobox extends JComboBox<Object>{
         this.setVisible(true);
     }
 
-    public int setSelectItem(GenericoDTO.Estado estado){
-        if(estado.equals(GenericoDTO.Estado.A))
+    public int setSelectItem(Generic.Estado estado){
+        if(estado.equals(Generic.Estado.A))
             return 1;
         else {
-          if(estado.equals(GenericoDTO.Estado.I))
+          if(estado.equals(Generic.Estado.I))
             return 2;
           else
             return 0;

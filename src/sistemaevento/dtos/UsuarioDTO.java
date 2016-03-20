@@ -8,16 +8,15 @@ package sistemaevento.dtos;
 
 import java.util.Objects;
 
-import sistemaevento.util.GenericoDTO.Estado;
-import sistemaevento.util.GenericoDTO.Rol;
+import sistemaevento.util.Generic.Estado;
+import sistemaevento.util.Generic.Rol;
 
 
 /**
  *
  * @author Mayra
  */
-public class UsuarioDTO { 
-    private Long id;
+public class UsuarioDTO extends GenericoDTO{ 
     private String codigo;
     private String clave;
     private Estado estado; 

@@ -9,14 +9,13 @@ package sistemaevento.dtos;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import sistemaevento.util.GenericoDTO.Estado;
+import sistemaevento.util.Generic.Estado;
 
 /**
  *
  * @author Mayra
  */
-public class RolDTO {
-    private Long id;
+public class RolDTO extends GenericoDTO{
     private String codigo;
     private String descripcion;
     private Long stock;

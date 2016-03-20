@@ -1,6 +1,5 @@
 package sistemaevento.frame;
 
-import java.awt.GridBagConstraints;
 import java.sql.SQLException;
 
 import javax.swing.JLabel;
@@ -9,9 +8,8 @@ import javax.swing.JTextField;
 import sistemaevento.dtos.ArticuloDTO;
 import sistemaevento.plantillas.frame.PlantillaNavegateFRM;
 import sistemaevento.util.Combobox;
-import sistemaevento.util.GenericoDTO;
+import sistemaevento.util.Generic;
 import sistemaevento.util.InputNumber;
-import sistemaevento.util.InputText;
 
 public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 
@@ -50,7 +48,7 @@ public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 	        articulo=new ArticuloDTO();
 	         //****INICIALIZAR COMPONENTES****//
 	        titulo="Nuevo Articulo";
-	        comboboxEstado = GenericoDTO.EstadoCombobox();
+	        comboboxEstado = Generic.EstadoCombobox();
 	        textFieldId=new InputNumber(19);
 	        textFieldStock=new InputNumber(19);
 	        textFieldCantidadReparacion=new InputNumber(19);
@@ -84,14 +82,14 @@ public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 
 	}
 	public void editarArticulo(ArticuloDTO articulo) {
-         textFieldId.setText(GenericoDTO.LongToString(articulo.getId()));
+         textFieldId.setText(Generic.LongToString(articulo.getId()));
          textFieldStock.setText(articulo.getStock().toString());  
          textFieldCodigo.setText(articulo.getCodigo());
          textFieldDescripcion.setText(articulo.getDescripcion());
          textFieldCosto.setText(articulo.getCosto().toPlainString());
          textFieldPrecioAlquiler.setText(articulo.getPrecioAlquiler().toPlainString());
          textFieldCantidadReparacion.setText(articulo.getCantidadReparacion().toString());
-         comboboxEstado.setSelectItem(GenericoDTO.Estado.A);   
+         comboboxEstado.setSelectItem(Generic.Estado.A);   
          
          //RESTRINCCIONES
          textFieldId.setEnabled(false);
@@ -107,7 +105,7 @@ public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
         articulo.setPrecioAlquiler(textFieldPrecioAlquiler.getBig());
         articulo.setCantidadReparacion(textFieldCantidadReparacion.getLong());
         articulo.setCantidadBuenEstado(textFieldCantidadBuenEstado.getLong());
-        articulo.setEstado(GenericoDTO.StringToEstado(comboboxEstado.getSelectedItem().toString()));
+        articulo.setEstado(Generic.StringToEstado(comboboxEstado.getSelectedItem().toString()));
 		inventarioG.guardarArticulo(articulo);
 	}
 	public void accionLimpiar(){

@@ -116,11 +116,26 @@ public class ConfiguracionDAOImpl implements ConfiguracionDAO {
         return usu;
 	}
 
-
-	@Override
-	public ArrayList<ArticuloDTO> buscarArticulo(ArticuloDTO articulo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Object> obtenereListElementos(String metodoAutoBusqueda) throws SQLException{
+		Connection conn=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		List<Object> objetos=new ArrayList<>();
+		try{
+			conn=(this.userConn!=null)?this.userConn:Conexion.getConnection();
+			stmt=conn.prepareStatement("call "+metodoAutoBusqueda+"(?)");
+			rs=stmt.executeQuery();
+	        while (rs.next()) {
+	            objetos.add(rs.next());
+	        }
+		}
+		finally{
+			Conexion.close(stmt);
+			if(this.userConn==null){
+				Conexion.close(conn);
+			}
+		}        
+        return objetos;
 	}
 
 }
