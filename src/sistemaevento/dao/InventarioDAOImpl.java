@@ -10,11 +10,13 @@ import java.util.List;
 
 import sistemaevento.conexion.Conexion;
 import sistemaevento.dtos.ArticuloDTO;
+import sistemaevento.dtos.ClienteDTO;
 import sistemaevento.dtos.PersonaDTO;
 import sistemaevento.dtos.TransporteDTO;
 import sistemaevento.dtos.UsuarioDTO;
 import sistemaevento.util.Criteria;
 import sistemaevento.util.Generic;
+import sistemaevento.util.GenericoDTO;
 
 public class InventarioDAOImpl implements InventarioDAO {
 	
@@ -126,8 +128,7 @@ public class InventarioDAOImpl implements InventarioDAO {
 	}
 	
 	
-<<<<<<< HEAD
-=======
+
 	public List<ClienteDTO> buscarCliente(ClienteDTO articulo) throws SQLException{
 		Connection conn=null;
 		Statement stmt=null;
@@ -188,7 +189,6 @@ public class InventarioDAOImpl implements InventarioDAO {
 		} 
 	}	
 	
->>>>>>> refs/remotes/origin/master
 	public List<UsuarioDTO> buscarUsuario(UsuarioDTO articulo) throws SQLException{
 		Connection conn=null;
 		Statement stmt=null;
@@ -249,7 +249,7 @@ public class InventarioDAOImpl implements InventarioDAO {
                 temp.setDireccion(datos.getString(4));
                 temp.setTelefono(datos.getString(5));
                 temp.setEmail(datos.getString(9));
-                temp.setEstado(GenericoDTO.StringToEstado(datos.getString(11)));      
+                temp.setEstado(Generic.StringToEstado(datos.getString(11)));      
                 articulos.add(temp); 
             }
 		}

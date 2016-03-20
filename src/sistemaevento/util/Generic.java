@@ -13,6 +13,8 @@ import java.util.Date;
 
 import javax.swing.JPanel;
 
+import sistemaevento.util.GenericoDTO.BanderaSiNo;
+
 /**
  *
  * @author Mayra
@@ -20,7 +22,7 @@ import javax.swing.JPanel;
 public class Generic {
    public static MensajeLbl mensaje;
    public enum BanderaSiNo{
-       SI ,NO ;
+       S ,N ;
    }
     public enum Estado{
        A,//ACTIVO
@@ -159,6 +161,30 @@ public static Date StringToDate(String text){
         	}
     	return null;
     	}
+    public static String SNToString(BanderaSiNo estado){
+        if(estado == BanderaSiNo.S){return "SI";}
+        else{if(estado == BanderaSiNo.N){return "NO";}
+        else {return " ";}
+        }
+    }
     
+    public static BanderaSiNo StringToSN(String text){
+        if(text.equals("SI") || text.equals("S")){
+            return BanderaSiNo.S;
+        }
+        else if (text.equals("NO") || text.equals("N")){
+                 return BanderaSiNo.N;
+            }
+        return null;
+    }
+    public static Combobox SNCombobox(){
+    	String[] rutasImagenes ={"/Imagenes/noAplica_icon.png","/Imagenes/activo_icon.png","/Imagenes/inactivo_icon.png"};       
+        ArrayList<String> itemsCombobox = new ArrayList<String>();
+        itemsCombobox.add("--------");
+        itemsCombobox.add("SI");
+        itemsCombobox.add("NO");
+        Combobox comboboxEstado = new Combobox(itemsCombobox.size(), itemsCombobox, 200,26, rutasImagenes);
+        return comboboxEstado;
+    }
     
 }

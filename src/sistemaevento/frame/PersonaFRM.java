@@ -1,18 +1,16 @@
 package sistemaevento.frame;
 
-import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import sistemaevento.dtos.PersonaDTO;
 import sistemaevento.plantillas.frame.PlantillaFRM;
 import sistemaevento.util.Combobox;
-import sistemaevento.util.GenericoDTO;
+import sistemaevento.util.Generic;
 import sistemaevento.util.InputNumber;
 import sistemaevento.util.InputText;
 
@@ -24,7 +22,6 @@ public class PersonaFRM extends PlantillaFRM {
 	private static final long serialVersionUID = -5616855064630810972L;
 
 	private PersonaDTO PersonaFilter;
-	private PersonaDTO Persona;
     private int filaActual;
     private List<PersonaDTO> resultados;
     private InputNumber textFieldId;
@@ -57,8 +54,8 @@ public class PersonaFRM extends PlantillaFRM {
 		setMinimumSize(new java.awt.Dimension(1000, 599));
 		PersonaFilter=new PersonaDTO();
 		//****INICIALIZAR COMPONENTES****//
-		comboboxEstado = GenericoDTO.EstadoCombobox();
-		SNCombobox = GenericoDTO.SNCombobox();
+		comboboxEstado = Generic.EstadoCombobox();
+		SNCombobox = Generic.SNCombobox();
 		textFieldId=new InputNumber(15);
 		textFieldCedula=new InputNumber(10);
 		textFieldNombre=new InputText(10);
@@ -114,10 +111,10 @@ public class PersonaFRM extends PlantillaFRM {
         PersonaFilter.setCedula(textFieldCedula.getText());
         PersonaFilter.setNombres(textFieldNombre.getText());
         PersonaFilter.setApellidos(textFieldApellido.getText());
-        PersonaFilter.setEstado(GenericoDTO.StringToEstado(comboboxEstado.getSelectedItem().toString()));
-        PersonaFilter.setCliente(GenericoDTO.StringToSN(SNCombobox.getSelectedItem().toString()));
-        PersonaFilter.setProveedor(GenericoDTO.StringToSN(SNCombobox.getSelectedItem().toString()));
-        PersonaFilter.setEmpleado(GenericoDTO.StringToSN(SNCombobox.getSelectedItem().toString()));
+        PersonaFilter.setEstado(Generic.StringToEstado(comboboxEstado.getSelectedItem().toString()));
+        PersonaFilter.setCliente(Generic.StringToSN(SNCombobox.getSelectedItem().toString()));
+        PersonaFilter.setProveedor(Generic.StringToSN(SNCombobox.getSelectedItem().toString()));
+        PersonaFilter.setEmpleado(Generic.StringToSN(SNCombobox.getSelectedItem().toString()));
         resultados=inventarioG.buscarPersona(PersonaFilter);
         mostrarTablaResultado(resultados);
         
@@ -134,7 +131,7 @@ public class PersonaFRM extends PlantillaFRM {
                 tableResultados.setValueAt(dto.getCedula(),i,1);
                 tableResultados.setValueAt(dto.getNombres(),i,2);
                 tableResultados.setValueAt(dto.getApellidos(),i,3);
-                tableResultados.setValueAt(GenericoDTO.EstadoToString(dto.getEstado()),i,4);
+                tableResultados.setValueAt(Generic.EstadoToString(dto.getEstado()),i,4);
                 filaActual++;
             }else i=21;
         } 
