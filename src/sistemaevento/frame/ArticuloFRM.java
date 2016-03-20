@@ -135,4 +135,9 @@ public class ArticuloFRM extends PlantillaFRM {
             mensaje.error("No ha seleccionado ningun elemento");
         }
     }
+    
+    protected void accionNuevo(ActionEvent evt) {                                            
+        ArticuloNavegateFRM articulo= new ArticuloNavegateFRM();
+        articulo.setVisible(true);
+	}
 }

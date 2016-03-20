@@ -55,11 +55,11 @@ public class TransporteFRM extends PlantillaFRM {
 		TransporteFilter=new TransporteDTO();
 		//****INICIALIZAR COMPONENTES****//
 		comboboxEstado = TransporteDTO.EstadoTransporteCombobox();
-		textFieldId=new InputNumber(18);
+		textFieldId=new InputNumber(15);
 //		textFieldId.setMaximumSize(new Dimension(5,3));
-		textFieldObservacion= new JTextField(50);
-		textFieldPlaca= new JTextField(15);
-		textFieldDescripcion=new InputText(50);
+		textFieldObservacion= new JTextField(10);
+		textFieldPlaca= new JTextField(10);
+		textFieldDescripcion=new InputText(10);
 		labelId=new JLabel(         "Id : ");
 		labelObservacion=new JLabel(     "Observacion : ");
 		labelDescripcion=new JLabel("Descripcion : ");
@@ -91,7 +91,6 @@ public class TransporteFRM extends PlantillaFRM {
 		columnTableResult.add("Observacion");
 		columnTableResult.add("Estado");
 		columnTableResult.add("Año Compra");
-		
 	 }
 	
 	
