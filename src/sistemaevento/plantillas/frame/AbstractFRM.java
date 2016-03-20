@@ -1,8 +1,5 @@
 package sistemaevento.plantillas.frame;
 
-import java.awt.Dimension;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import sistemaevento.dao.ConfiguracionDAO;

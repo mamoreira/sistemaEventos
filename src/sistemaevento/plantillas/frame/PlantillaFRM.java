@@ -3,7 +3,6 @@ package sistemaevento.plantillas.frame;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -38,7 +37,6 @@ public class PlantillaFRM extends AbstractFRM {
     private javax.swing.JButton buttonUltimo;
     protected javax.swing.JPanel panelPrincipal;
     private javax.swing.JScrollPane scrollPanelTable;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField paginacionTxt;
     private javax.swing.JPanel panelBotonesTabla;
     protected javax.swing.JTable tableResultados;
@@ -60,7 +58,6 @@ public class PlantillaFRM extends AbstractFRM {
         panelBotones=new javax.swing.JPanel();
         panelFiltros = new javax.swing.JPanel();
         panelResultados = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
         scrollPanelTable = new javax.swing.JScrollPane();
         tableResultados = new javax.swing.JTable();
         panelBotonesTabla = new javax.swing.JPanel();

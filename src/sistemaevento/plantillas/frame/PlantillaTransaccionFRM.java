@@ -7,58 +7,52 @@ import java.awt.FlowLayout;
 import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class PlantillaNavegateFRM extends AbstractFRM {
-    /**
+public class PlantillaTransaccionFRM extends AbstractFRM {
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7068637637336498231L;
+	private static final long serialVersionUID = 2327812023917579154L;
 	private javax.swing.JButton buttonGuardar;
-    private javax.swing.JButton buttonLimpiar;
+    private javax.swing.JButton buttonProcesar;
     private javax.swing.JButton buttonEliminar;
     private javax.swing.JPanel panelBotones;
-    protected javax.swing.JPanel panelComponentes;
-    protected javax.swing.JPanel panelDescripcion;
-    protected javax.swing.JPanel panelDatos;
+    private javax.swing.JPanel panelBody;
+    private javax.swing.JPanel panelFooter;
+    protected javax.swing.JPanel panelCabecera;
+    protected javax.swing.JPanel panelDetalle;
     private javax.swing.JScrollPane scrollPanel;
-	private JPanel panelLbl;
-	private JPanel panelComp;
     protected String titulo;
     
-    public PlantillaNavegateFRM() {
+    public PlantillaTransaccionFRM() {
         initComponents();
     }
     public void initComponents(){
-         buttonLimpiar = new javax.swing.JButton();
+    	 buttonProcesar = new javax.swing.JButton();
          buttonGuardar = new javax.swing.JButton();
          buttonEliminar = new javax.swing.JButton();
-         panelComponentes = new javax.swing.JPanel();
+         panelBody = new javax.swing.JPanel();
          panelBotones = new javax.swing.JPanel();
-         panelDescripcion=new javax.swing.JPanel();
-         panelDatos = new javax.swing.JPanel();
-         panelLbl=new javax.swing.JPanel();
-         panelComp=new javax.swing.JPanel();
+         panelFooter=new javax.swing.JPanel();
+         panelDetalle = new javax.swing.JPanel();
+        
          scrollPanel=new JScrollPane();
          inicializarExtraComponentes();
          setTitle(titulo);
          this.setSize(new Dimension(400,400) );
          this.setLayout(new BorderLayout());
          
-         panelBotones.setPreferredSize(new Dimension(300,60));
+         panelBotones.setPreferredSize(new Dimension(800,60));
          panelBotones.setLayout(new FlowLayout(FlowLayout.LEFT));
          panelBotones.setBorder(BorderFactory.createTitledBorder("Acciones")); 
-         panelDatos.setLayout(new FlowLayout(FlowLayout.CENTER));
-         scrollPanel.setBorder(BorderFactory.createTitledBorder("Datos")); 
-         panelComponentes.setLayout(new FlowLayout(FlowLayout.LEFT));
-         panelDescripcion.setLayout(new FlowLayout(FlowLayout.LEFT));
- 		 panelLbl.setLayout(new BoxLayout(panelLbl,BoxLayout.Y_AXIS));
- 		 panelComp.setLayout(new BoxLayout(panelComp,BoxLayout.Y_AXIS));
- 		 scrollPanel.setPreferredSize(panelDatos.getPreferredSize());
+         panelBody.setLayout(new FlowLayout(BoxLayout.Y_AXIS));
+         panelBody.setBorder(BorderFactory.createTitledBorder("Datos")); 
+         panelDetalle.setLayout(new BorderLayout());
+         panelFooter.setLayout(new FlowLayout(FlowLayout.LEFT));
  		 
          buttonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar_icon.png"))); // NOI18N
          buttonGuardar.setText("Guardar");
@@ -67,19 +61,17 @@ public class PlantillaNavegateFRM extends AbstractFRM {
                  try {
  					accionGuardar();
  				} catch (SQLException e) {
- 					// TODO Auto-generated catch block
  					e.printStackTrace();
  				}
              }
          });
-         buttonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/limpiar_icon.png"))); // NOI18N
-         buttonLimpiar.setText("Limpiar");
-         buttonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+         buttonProcesar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/limpiar_icon.png"))); // NOI18N
+         buttonProcesar.setText("Limpiar");
+         buttonProcesar.addActionListener(new java.awt.event.ActionListener() {
              public void actionPerformed(java.awt.event.ActionEvent evt) {
                  try {
  					accionLimpiar();
  				} catch (SQLException e) {
- 					// TODO Auto-generated catch block
  					e.printStackTrace();
  				}
              }
@@ -96,14 +88,12 @@ public class PlantillaNavegateFRM extends AbstractFRM {
  				}
              }
          });
- 		panelDatos.add(panelLbl);
- 		panelDatos.add(panelComp);
- 		scrollPanel.setViewportView(panelDatos);
         panelBotones.add(buttonGuardar);
-        panelBotones.add(buttonLimpiar);
+        panelBotones.add(buttonProcesar);
         panelBotones.add(buttonEliminar);
         add(panelBotones,BorderLayout.NORTH);
-        add(scrollPanel,BorderLayout.CENTER);
+        add(panelBody,BorderLayout.CENTER);
+        add(panelFooter,BorderLayout.SOUTH);
         setLocationRelativeTo(null);
 
     }
@@ -121,10 +111,10 @@ public class PlantillaNavegateFRM extends AbstractFRM {
 	protected void inicializarExtraComponentes() {
 		
 	}
-	public void nuevoComponente(JLabel descripcion,Component componente){
-		panelLbl.add(descripcion);
-		panelLbl.add(Box.createVerticalStrut(10));
-		panelComp.add(componente);
-		panelComp.add(Box.createVerticalStrut(5));
+	public void addComponentHeader(JLabel descripcion,Component componente){
+		
+	}
+	public void addComponentFooter(JLabel descripcion,Component componente,JPanel panel){
+		
 	}
 }

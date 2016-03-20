@@ -1,6 +1,7 @@
 package sistemaevento.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,12 +14,13 @@ import sistemaevento.dtos.PersonaDTO;
 import sistemaevento.dtos.TransporteDTO;
 import sistemaevento.dtos.UsuarioDTO;
 import sistemaevento.util.Criteria;
-import sistemaevento.util.GenericoDTO;
+import sistemaevento.util.Generic;
 
 public class InventarioDAOImpl implements InventarioDAO {
 	
 	private Connection userConn;
-
+	private final String PRO_SAVE_OR_UPDATE_ARTICULO="call saveOrUpdateArticulo(?,?,?,?,?,?,?,?);";
+	
 	public List<ArticuloDTO> buscarArticulo(ArticuloDTO articulo) throws SQLException{
 		Connection conn=null;
 		Statement stmt=null;
@@ -43,7 +45,7 @@ public class InventarioDAOImpl implements InventarioDAO {
                 temp.setStock(datos.getLong(6));
                 temp.setCantidadBuenEstado(datos.getLong(7));
                 temp.setCantidadReparacion(datos.getLong(8));
-                temp.setEstado(GenericoDTO.StringToEstado(datos.getString(9)));
+                temp.setEstado(Generic.StringToEstado(datos.getString(9)));
                 articulos.add(temp); 
             }
 		}
@@ -75,7 +77,7 @@ public class InventarioDAOImpl implements InventarioDAO {
                 articulo.setStock(datos.getLong(6));
                 articulo.setCantidadBuenEstado(datos.getLong(7));
                 articulo.setCantidadReparacion(datos.getLong(8));
-                articulo.setEstado(GenericoDTO.StringToEstado(datos.getString(9))); 
+                articulo.setEstado(Generic.StringToEstado(datos.getString(9))); 
             }
 		}
 		finally{
@@ -124,6 +126,69 @@ public class InventarioDAOImpl implements InventarioDAO {
 	}
 	
 	
+<<<<<<< HEAD
+=======
+	public List<ClienteDTO> buscarCliente(ClienteDTO articulo) throws SQLException{
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet datos=null;
+		ArrayList<ClienteDTO> articulos=new ArrayList<ClienteDTO>();
+		try{
+			conn=(this.userConn!=null)?this.userConn:Conexion.getConnection();
+			stmt=conn.createStatement();
+			Criteria criteria=new Criteria("cliente");
+            criteria.addEqualsIfNotNull("id",articulo.getId());
+			criteria.addLikeIfNotNull("cedula",articulo.getCedula());
+            criteria.addLikeIfNotNull("nombres",articulo.getNombres());
+            criteria.addLikeIfNotNull("apellidos",articulo.getApellidos());
+            criteria.addEqualsIfNotNull("estado",articulo.getEstado()); 
+            datos=stmt.executeQuery(criteria.getQuery());
+            while(datos.next()){
+                ClienteDTO temp=new ClienteDTO();
+                temp.setId(datos.getLong(1));
+                temp.setCedula(datos.getString(2));
+                temp.setNombres(datos.getString(3));
+                temp.setApellidos(datos.getString(4));
+                temp.setEstado(Generic.StringToEstado(datos.getString(5)));
+                articulos.add(temp); 
+            }
+		}
+		finally{
+			Conexion.close(stmt);
+			if(this.userConn==null){
+				Conexion.close(conn);
+			}
+		} 
+        return articulos;
+	}
+
+	public void guardarArticulo(ArticuloDTO articulo) throws SQLException{
+		Connection conn=null;
+		PreparedStatement stmt=null;
+		int rows=0;
+		try{
+			conn=(this.userConn!=null)?this.userConn:Conexion.getConnection();
+			stmt=conn.prepareStatement(PRO_SAVE_OR_UPDATE_ARTICULO);
+			int index=1;
+			stmt.setString(index++, articulo.getCodigo());
+			stmt.setString(index++, articulo.getDescripcion());
+			stmt.setBigDecimal(index++, articulo.getCosto());
+			stmt.setBigDecimal(index++, articulo.getPrecioAlquiler());
+			stmt.setLong(index++, articulo.getStock());
+			stmt.setLong(index++, articulo.getCantidadBuenEstado());
+			stmt.setLong(index++, articulo.getCantidadReparacion());
+			stmt.setString(index, articulo.getEstado().toString());
+			rows=stmt.executeUpdate();
+		}
+		finally{
+			Conexion.close(stmt);
+			if(this.userConn==null){
+				Conexion.close(conn);
+			}
+		} 
+	}	
+	
+>>>>>>> refs/remotes/origin/master
 	public List<UsuarioDTO> buscarUsuario(UsuarioDTO articulo) throws SQLException{
 		Connection conn=null;
 		Statement stmt=null;
@@ -141,7 +206,7 @@ public class InventarioDAOImpl implements InventarioDAO {
             	UsuarioDTO temp=new UsuarioDTO();
                 temp.setId(datos.getLong(1));
                 temp.setCodigo(datos.getString(2));
-                temp.setEstado(GenericoDTO.StringToEstado(datos.getString(4)));
+                temp.setEstado(Generic.StringToEstado(datos.getString(4)));
                 articulos.add(temp); 
             }
 		}

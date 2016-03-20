@@ -18,6 +18,8 @@ public interface InventarioDAO {
 
 	public List<PersonaDTO> buscarPersona(PersonaDTO personaFilter) throws SQLException;
 
+	public void guardarArticulo(ArticuloDTO articulo) throws SQLException;
+
 	public List<UsuarioDTO> buscarUsuario(UsuarioDTO usuarioFilter) throws SQLException;
 
 }

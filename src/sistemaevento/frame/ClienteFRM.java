@@ -7,38 +7,37 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
-import sistemaevento.dtos.UsuarioDTO;
+import sistemaevento.dtos.ClienteDTO;
 import sistemaevento.plantillas.frame.PlantillaFRM;
 import sistemaevento.util.Combobox;
 import sistemaevento.util.Generic;
 import sistemaevento.util.InputNumber;
 import sistemaevento.util.InputText;
 
-public class UsuarioFRM extends PlantillaFRM {
+public class ClienteFRM extends PlantillaFRM {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3816074730854270950L;
-	/**
-	 * 
-	 */
+	private static final long serialVersionUID = 7600973393484979659L;
 
-	
-
-	private UsuarioDTO UsuarioFilter;
+	private ClienteDTO ClienteFilter;
     private int filaActual;
-    private List<UsuarioDTO> resultados;
+    private List<ClienteDTO> resultados;
     private InputNumber textFieldId;
-    private InputText textFieldCodigo;
+    private InputNumber textFieldCedula;
+    private InputText textFieldNombres;
+    private InputText textFieldApellidos;
     private Combobox comboboxEstado;
     private JLabel labelId;
-    private JLabel labelCodigo;
+    private JLabel labelCedula;
+    private JLabel labelNombres;
+    private JLabel labelApellidos;
     private JLabel labelEstado;
     
 
     
-	public UsuarioFRM(){
+	public ClienteFRM(){
 
 	}
 	
@@ -49,14 +48,18 @@ public class UsuarioFRM extends PlantillaFRM {
 	public void inicializaComponentes() {
 		setBackground(new java.awt.Color(102, 51, 255));
 		setMinimumSize(new java.awt.Dimension(1000, 599));
-		UsuarioFilter=new UsuarioDTO();
+		ClienteFilter=new ClienteDTO();
 		//****INICIALIZAR COMPONENTES****//
 		comboboxEstado = Generic.EstadoCombobox();
 		textFieldId=new InputNumber(15);
-		textFieldCodigo=new InputText(10);
-		labelId=new JLabel("Id : ");
-		labelCodigo=new JLabel("Codigo : ");
-		labelEstado=new JLabel("Estado : ");
+		textFieldCedula=new InputNumber(10);
+		textFieldNombres=new InputText(10);
+		textFieldApellidos=new InputText(10);
+		labelId=new JLabel(         "Id : ");
+		labelCedula=new JLabel(     "Cedula : ");
+		labelNombres=new JLabel("Nombres : ");
+		labelApellidos=new JLabel("Apellidos : ");
+		labelEstado=new JLabel(     "Estado : ");
 
     }
 	
@@ -66,9 +69,10 @@ public class UsuarioFRM extends PlantillaFRM {
 	 */
 	public void agregarFiltros(){
 		nuevoFiltro(textFieldId,labelId);
-		nuevoFiltro(textFieldCodigo,labelCodigo);
+		nuevoFiltro(textFieldCedula,labelCedula);
+		nuevoFiltro(textFieldNombres,labelNombres);
+		nuevoFiltro(textFieldApellidos,labelApellidos);
 		nuevoFiltro(comboboxEstado,labelEstado);
-
 	}
 	
 	/*
@@ -78,7 +82,9 @@ public class UsuarioFRM extends PlantillaFRM {
 	public void llenarCabeceraTabla(){
 		columnTableResult=new ArrayList<>();
 		columnTableResult.add("Id");
-		columnTableResult.add("Codigo");
+		columnTableResult.add("Cedula");
+		columnTableResult.add("Nombres");
+		columnTableResult.add("Apellidos");
 		columnTableResult.add("Estado");
 	
 	 }
@@ -90,24 +96,28 @@ public class UsuarioFRM extends PlantillaFRM {
 	 */
     public void accionBuscar(java.awt.event.ActionEvent evt) throws SQLException {   
     	filaActual=0;
-        UsuarioFilter.setId(textFieldId.getLong());
-        UsuarioFilter.setCodigo(textFieldCodigo.getText());
-        UsuarioFilter.setEstado(Generic.StringToEstado(comboboxEstado.getSelectedItem().toString()));
-        resultados=inventarioG.buscarUsuario(UsuarioFilter);
+        ClienteFilter.setId(textFieldId.getLong());
+        ClienteFilter.setCedula(textFieldCedula.getText());
+        ClienteFilter.setNombres(textFieldNombres.getText());
+        ClienteFilter.setApellidos(textFieldApellidos.getText());
+        ClienteFilter.setEstado(Generic.StringToEstado(comboboxEstado.getSelectedItem().toString()));
+        resultados=inventarioG.buscarCliente(ClienteFilter);
         mostrarTablaResultado(resultados);
         
     }
-    private boolean mostrarTablaResultado(List<UsuarioDTO> lista) {
+    private boolean mostrarTablaResultado(List<ClienteDTO> lista) {
         Object [] o={"",""};
         limpiarTabla(tableResultados);
         DefaultTableModel temp = (DefaultTableModel) tableResultados.getModel();
         for (int i = 0; i < 20; i++) {
             if(i<lista.size()){
                 temp.addRow(o);
-                UsuarioDTO dto=lista.get(filaActual);
+                ClienteDTO dto=lista.get(filaActual);
                 tableResultados.setValueAt(dto.getId(),i,0);                
-                tableResultados.setValueAt(dto.getCodigo(),i,1);
-                tableResultados.setValueAt(Generic.EstadoToString(dto.getEstado()),i,2);
+                tableResultados.setValueAt(dto.getCedula(),i,1);
+                tableResultados.setValueAt(dto.getNombres(),i,2);
+                tableResultados.setValueAt(dto.getApellidos(),i,3);
+                tableResultados.setValueAt(Generic.EstadoToString(dto.getEstado()),i,4);
                 filaActual++;
             }else i=21;
         } 
@@ -116,9 +126,9 @@ public class UsuarioFRM extends PlantillaFRM {
     } 
    /* public void accionEditar(ActionEvent evt) throws SQLException{
         if(tableResultados.getSelectedRow()!=-1){
-            UsuarioNavegateFRM UsuarioEditar= new UsuarioNavegateFRM();
-            Usuario=inventarioG.obtenerUsuarioPorId((Long) tableResultados.getModel().getValueAt(tableResultados.getSelectedRow(),0));
-            UsuarioEditar.editarUsuario(Usuario);
+            ClienteNavegateFRM ClienteEditar= new ClienteNavegateFRM();
+            Cliente=inventarioG.obtenerClientePorId((Long) tableResultados.getModel().getValueAt(tableResultados.getSelectedRow(),0));
+            ClienteEditar.editarCliente(Cliente);
         }
         else{
             mensaje.error("No ha seleccionado ningun elemento");
