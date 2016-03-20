@@ -1,6 +1,7 @@
 package sistemaevento.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,7 +18,8 @@ import sistemaevento.util.GenericoDTO;
 public class InventarioDAOImpl implements InventarioDAO {
 	
 	private Connection userConn;
-
+	private final String PRO_SAVE_OR_UPDATE_ARTICULO="call saveOrUpdateArticulo(?,?,?,?,?,?,?,?);";
+	
 	public List<ArticuloDTO> buscarArticulo(ArticuloDTO articulo) throws SQLException{
 		Connection conn=null;
 		Statement stmt=null;
@@ -155,6 +157,31 @@ public class InventarioDAOImpl implements InventarioDAO {
 			}
 		} 
         return articulos;
+	}
+	public void guardarArticulo(ArticuloDTO articulo) throws SQLException{
+		Connection conn=null;
+		PreparedStatement stmt=null;
+		int rows=0;
+		try{
+			conn=(this.userConn!=null)?this.userConn:Conexion.getConnection();
+			stmt=conn.prepareStatement(PRO_SAVE_OR_UPDATE_ARTICULO);
+			int index=1;
+			stmt.setString(index++, articulo.getCodigo());
+			stmt.setString(index++, articulo.getDescripcion());
+			stmt.setBigDecimal(index++, articulo.getCosto());
+			stmt.setBigDecimal(index++, articulo.getPrecioAlquiler());
+			stmt.setLong(index++, articulo.getStock());
+			stmt.setLong(index++, articulo.getCantidadBuenEstado());
+			stmt.setLong(index++, articulo.getCantidadReparacion());
+			stmt.setString(index, articulo.getEstado().toString());
+			rows=stmt.executeUpdate();
+		}
+		finally{
+			Conexion.close(stmt);
+			if(this.userConn==null){
+				Conexion.close(conn);
+			}
+		} 
 	}
 }
 

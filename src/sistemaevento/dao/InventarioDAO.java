@@ -17,4 +17,7 @@ public interface InventarioDAO {
 
 	public List<ClienteDTO> buscarCliente(ClienteDTO clienteFilter) throws SQLException;
 
+	public void guardarArticulo(ArticuloDTO articulo) throws SQLException;
+
+
 }
