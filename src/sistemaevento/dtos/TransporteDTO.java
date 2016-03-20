@@ -89,7 +89,7 @@ public class TransporteDTO extends GenericoDTO{
    
     public static Combobox EstadoTransporteCombobox(){
         String[] rutas={"/Imagenes/activo_icon.png","/Imagenes/inactivo_icon.png","/Imagenes/inactivo_icon.png"}; 
-        ArrayList lista=new ArrayList();
+        ArrayList<String> lista=new ArrayList<String>();
         lista.add("ACTIVO");
         lista.add("INACTIVO");
         lista.add("REPARACION");

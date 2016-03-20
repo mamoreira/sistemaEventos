@@ -16,7 +16,12 @@ import javax.swing.JLabel;
  */
 public class MensajeLbl extends JLabel{
 
-    public MensajeLbl() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3863704791788071674L;
+
+	public MensajeLbl() {
     }
     public void error(String mensaje){
         this.setFont(new java.awt.Font("Arial", 1, 14));

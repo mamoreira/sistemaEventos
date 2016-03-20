@@ -77,12 +77,14 @@ public class Generic {
        return String.valueOf(num); 
    }
       
-   public static Date StringToDate(String text){
+   @SuppressWarnings("deprecation")
+public static Date StringToDate(String text){
        return new Date(text);
    }
    public static String DateToString(Date date){
        if (date != null){
-           String se=date.getDay()+"/"+date.getMonth()+"/"+date.getYear();
+           @SuppressWarnings("deprecation")
+		String se=date.getDay()+"/"+date.getMonth()+"/"+date.getYear();
           return se;
        }else
            return "";

@@ -16,7 +16,12 @@ public class Fecha extends Date{
 
         
 
-    //en fecha obtenemos la fecha y hora del sistema
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3301872521069051461L;
+
+	//en fecha obtenemos la fecha y hora del sistema
     public Fecha() {
     }
         
@@ -41,12 +46,12 @@ public class Fecha extends Date{
     }
     public static void main(String [] args){
         String s="d";
-        Fecha f=new Fecha();
         System.out.println(s.matches("[0-9|.]+"));
-        System.out.println(f.getFechaActual());
+        System.out.println(Fecha.getFechaActual());
     }
     
-    public static Date fecha(String fecha){
+    @SuppressWarnings("deprecation")
+	public static Date fecha(String fecha){
         Date date=new Date();
         String[] array=fecha.split("-");
         date.setYear(Integer.parseInt(array[0]));
@@ -56,11 +61,13 @@ public class Fecha extends Date{
     }
     
     public static String fecha(Date fecha){
-        String date = ""+fecha.getYear()+"-"+fecha.getMonth()+"-"+fecha.getDay();
+        @SuppressWarnings("deprecation")
+		String date = ""+fecha.getYear()+"-"+fecha.getMonth()+"-"+fecha.getDay();
         return date;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public String toString() {
         return  ""+this.getYear()+"-"+this.getMonth()+"-"+this.getDay();
     }
