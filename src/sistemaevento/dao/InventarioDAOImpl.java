@@ -9,6 +9,7 @@ import java.util.List;
 
 import sistemaevento.conexion.Conexion;
 import sistemaevento.dtos.ArticuloDTO;
+import sistemaevento.dtos.ClienteDTO;
 import sistemaevento.dtos.TransporteDTO;
 import sistemaevento.util.Criteria;
 import sistemaevento.util.GenericoDTO;
@@ -109,6 +110,41 @@ public class InventarioDAOImpl implements InventarioDAO {
                 temp.setObservacion(datos.getString(4));
                 temp.setEstadoTransporte(temp.StringToEstadoTransporte(datos.getString(5)));
                 temp.setAnioCompra(datos.getString(6));
+                articulos.add(temp); 
+            }
+		}
+		finally{
+			Conexion.close(stmt);
+			if(this.userConn==null){
+				Conexion.close(conn);
+			}
+		} 
+        return articulos;
+	}
+	
+	
+	public List<ClienteDTO> buscarCliente(ClienteDTO articulo) throws SQLException{
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet datos=null;
+		ArrayList<ClienteDTO> articulos=new ArrayList<ClienteDTO>();
+		try{
+			conn=(this.userConn!=null)?this.userConn:Conexion.getConnection();
+			stmt=conn.createStatement();
+			Criteria criteria=new Criteria("cliente");
+            criteria.addEqualsIfNotNull("id",articulo.getId());
+			criteria.addLikeIfNotNull("cedula",articulo.getCedula());
+            criteria.addLikeIfNotNull("nombres",articulo.getNombres());
+            criteria.addLikeIfNotNull("apellidos",articulo.getApellidos());
+            criteria.addEqualsIfNotNull("estado",articulo.getEstado()); 
+            datos=stmt.executeQuery(criteria.getQuery());
+            while(datos.next()){
+                ClienteDTO temp=new ClienteDTO();
+                temp.setId(datos.getLong(1));
+                temp.setCedula(datos.getString(2));
+                temp.setNombres(datos.getString(3));
+                temp.setApellidos(datos.getString(4));
+                temp.setEstado(GenericoDTO.StringToEstado(datos.getString(5)));
                 articulos.add(temp); 
             }
 		}

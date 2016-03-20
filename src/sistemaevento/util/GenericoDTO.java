@@ -58,7 +58,7 @@ public class GenericoDTO {
       public static String EstadoToString(Estado estado){
        if(estado == Estado.A){return "ACTIVO";}
        else{if(estado == Estado.I){return "INACTIVO";}
-       else {return "ELIMIDANO";}
+       else {return "ELIMINADO";}
        }
    }
       
