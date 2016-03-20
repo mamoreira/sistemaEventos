@@ -116,7 +116,7 @@ public class ConfiguracionDAOImpl implements ConfiguracionDAO {
         return usu;
 	}
 
-	public List<GenericoDTO> obtenereListElementos(String metodoAutoBusqueda) throws SQLException{
+	public List<GenericoDTO> obtenereListElementos(String metodoAutoBusqueda,String cadena) throws SQLException{
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -124,6 +124,7 @@ public class ConfiguracionDAOImpl implements ConfiguracionDAO {
 		try{
 			conn=(this.userConn!=null)?this.userConn:Conexion.getConnection();
 			stmt=conn.prepareStatement("call "+metodoAutoBusqueda+"(?)");
+			stmt.setString(1, cadena+"%");
 			rs=stmt.executeQuery();
 	        while (rs.next()) {
 	        	GenericoDTO generico= new GenericoDTO();
