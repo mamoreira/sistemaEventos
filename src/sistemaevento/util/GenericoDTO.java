@@ -27,6 +27,7 @@ public class GenericoDTO {
        I,//INACTIVO
        E;//ELIMINADO
    }
+
      
     public static Estado StringToEstado(String text){
         if(text.equals("ACTIVO") || text.equals("A")){
@@ -35,6 +36,9 @@ public class GenericoDTO {
         else if (text.equals("INACTIVO") || text.equals("I")){
                  return Estado.I;
             }
+        else if (text.equals("ELIMINADO") || text.equals("E")){
+            return Estado.E;
+       }
         return null;
     }
 //   public static TransporteDTO.EstadoTransporte StringToEstadoTransporte(String text){
@@ -58,7 +62,7 @@ public class GenericoDTO {
       public static String EstadoToString(Estado estado){
        if(estado == Estado.A){return "ACTIVO";}
        else{if(estado == Estado.I){return "INACTIVO";}
-       else {return "ELIMINADO";}
+       else {return " ";}
        }
    }
       
@@ -113,11 +117,46 @@ public class GenericoDTO {
     
     public static Combobox RolCombobox(){
         String[] rutasImagenes ={"/Imagenes/secretaria_icon.png","/Imagenes/box_icon.png","/Imagenes/administrador_icon.png"};       
-        ArrayList<String> itemsCombobox = new ArrayList<>();
+        ArrayList<String> itemsCombobox = new ArrayList<String>();
+        itemsCombobox.add("--------");
         itemsCombobox.add("SECRETARIA");
         itemsCombobox.add("BODEGUERO");
         itemsCombobox.add("ADMINISTRADOR");
-        Combobox comboboxEstado = new Combobox(itemsCombobox.size(), itemsCombobox, 206,26, rutasImagenes);
-        return comboboxEstado;
+        Combobox RolCombobox = new Combobox(itemsCombobox.size(), itemsCombobox, 200,26, rutasImagenes);
+        return RolCombobox;
     }
+    
+    
+    public enum Rol{
+        A,//administrador
+        S,//secretaria
+        B; //bodeguero
+        public boolean isAdministrador(){return this== A;}
+        public boolean isBodeguero(){return this== B;}
+        public boolean isSecretaria(){return this== S;}
+    }
+    
+    public static Rol StringToRol(String text){
+       if(text.equals("ADMINISTRADOR") || text.equals("A")){
+           return Rol.A;
+       }
+       else if (text.equals("SECRETARIA") || text.equals("S")){
+                return Rol.S;
+           }
+       else if (text.equals("BODEGUERO") || text.equals("B")){
+           return Rol.B;
+      }
+       return null;
+   }
+    
+    public static String RolToString(Rol rol){
+        if(rol == Rol.A){return "ADMINISTRADOR";}
+        else{if(rol == Rol.S){return "SECRETARIA";}
+        else{if(rol == Rol.B){return "BODEGUERO";}
+        		}
+        	}
+    	return null;
+    	}
+    
+    
 }
