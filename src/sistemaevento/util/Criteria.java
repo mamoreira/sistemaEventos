@@ -14,17 +14,12 @@ import java.math.BigDecimal;
  */
 public class Criteria {
     private String query;
-    private String aliase;
-    private String tablaPrincipal;
-    
     public Criteria(String tabla) {
-        tablaPrincipal=tabla;
         query="Select * from "+tabla;
     }
 
    public Criteria(String tabla,String aliase) {
-       this.aliase=aliase;
-        query="Select * from "+tabla+" "+aliase;
+       query="Select * from "+tabla+" "+aliase;
     }
    
     public String getQuery() {

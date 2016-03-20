@@ -5,14 +5,13 @@
  */
 package sistemaevento.dtos;
 
-import sistemaevento.util.GenericoDTO.Estado;
+import sistemaevento.util.Generic.Estado;
 
 /**
  *
  * @author Mayra
  */
-public class OpcionDTO {
-    private Long id;
+public class OpcionDTO extends GenericoDTO{
     private String codigo;
     private String descripcion;
     private String objeto;

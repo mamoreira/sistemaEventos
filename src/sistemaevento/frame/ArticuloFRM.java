@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import sistemaevento.dtos.ArticuloDTO;
 import sistemaevento.plantillas.frame.PlantillaFRM;
 import sistemaevento.util.Combobox;
-import sistemaevento.util.GenericoDTO;
+import sistemaevento.util.Generic;
 import sistemaevento.util.InputNumber;
 import sistemaevento.util.InputText;
 
@@ -51,7 +51,7 @@ public class ArticuloFRM extends PlantillaFRM {
 		setMinimumSize(new java.awt.Dimension(1000, 599));
 		articuloFilter=new ArticuloDTO();
 		//****INICIALIZAR COMPONENTES****//
-		comboboxEstado = GenericoDTO.EstadoCombobox();
+		comboboxEstado = Generic.EstadoCombobox();
 		textFieldId=new InputNumber(15);
 //		textFieldId.setMaximumSize(new Dimension(5,3));
 		textFieldCodigo=new JTextField(10);
@@ -99,7 +99,7 @@ public class ArticuloFRM extends PlantillaFRM {
         articuloFilter.setId(textFieldId.getLong());
         articuloFilter.setCodigo(textFieldCodigo.getText());
         articuloFilter.setDescripcion(textFieldDescripcion.getText());
-        articuloFilter.setEstado(GenericoDTO.StringToEstado(comboboxEstado.getSelectedItem().toString()));
+        articuloFilter.setEstado(Generic.StringToEstado(comboboxEstado.getSelectedItem().toString()));
         resultados=inventarioG.buscarArticulo(articuloFilter);
         mostrarTablaResultado(resultados);
         
@@ -113,7 +113,7 @@ public class ArticuloFRM extends PlantillaFRM {
                 temp.addRow(o);
                 ArticuloDTO dto=lista.get(filaActual);
                 tableResultados.setValueAt(dto.getId(),i,0);
-                tableResultados.setValueAt(GenericoDTO.EstadoToString(dto.getEstado()),i,1);
+                tableResultados.setValueAt(Generic.EstadoToString(dto.getEstado()),i,1);
                 tableResultados.setValueAt(dto.getCodigo(),i,2);
                 tableResultados.setValueAt(dto.getDescripcion(),i,3);
                 tableResultados.setValueAt(dto.getStock(),i,4);

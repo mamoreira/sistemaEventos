@@ -14,7 +14,11 @@ import javax.swing.JPanel;
  * @author PC
  */
 public class FondoInicial extends JPanel{
-    private Image fondo;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -984618177605703506L;
+	private Image fondo;
     
     public FondoInicial(){
     

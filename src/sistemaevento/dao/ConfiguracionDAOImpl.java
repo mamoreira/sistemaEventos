@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sistemaevento.conexion.Conexion;
-import sistemaevento.dtos.ArticuloDTO;
+import sistemaevento.dtos.GenericoDTO;
 import sistemaevento.dtos.OpcionDTO;
 import sistemaevento.dtos.UsuarioDTO;
 
@@ -116,11 +116,29 @@ public class ConfiguracionDAOImpl implements ConfiguracionDAO {
         return usu;
 	}
 
-
-	@Override
-	public ArrayList<ArticuloDTO> buscarArticulo(ArticuloDTO articulo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GenericoDTO> obtenereListElementos(String metodoAutoBusqueda) throws SQLException{
+		Connection conn=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		List<GenericoDTO> objetos=new ArrayList<>();
+		try{
+			conn=(this.userConn!=null)?this.userConn:Conexion.getConnection();
+			stmt=conn.prepareStatement("call "+metodoAutoBusqueda+"(?)");
+			rs=stmt.executeQuery();
+	        while (rs.next()) {
+	        	GenericoDTO generico= new GenericoDTO();
+	        	generico.setId(rs.getLong(1));
+	        	generico.setDescripcion(rs.getString(2));
+	            objetos.add(generico);
+	        }
+		}
+		finally{
+			Conexion.close(stmt);
+			if(this.userConn==null){
+				Conexion.close(conn);
+			}
+		}        
+        return objetos;
 	}
 
 }

@@ -23,8 +23,7 @@ public class TransporteFRM extends PlantillaFRM {
 
 
 	private TransporteDTO TransporteFilter;
-	private TransporteDTO Transporte;
-    private int filaActual;
+	private int filaActual;
     private List<TransporteDTO> resultados;
     private InputNumber textFieldId;
     private JTextField textFieldPlaca;

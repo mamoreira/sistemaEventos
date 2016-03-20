@@ -9,14 +9,13 @@ package sistemaevento.dtos;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import sistemaevento.util.GenericoDTO.Estado;
+import sistemaevento.util.Generic.Estado;
 
 /**
  *
  * @author Mayra
  */
-public class ArticuloDTO {
-    private Long id;
+public class ArticuloDTO extends GenericoDTO{
     private String codigo;
     private String descripcion;
     private Long stock;
@@ -125,8 +124,5 @@ public class ArticuloDTO {
         return true;
     }
 
-    public boolean validarCampos() {
-        return id!= null && estado !=null && stock!= null &&  codigo != null && descripcion!= null && cantidadBuenEstado != null && cantidadReparacion != null;
-    }
     
 }
