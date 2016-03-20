@@ -11,6 +11,7 @@ import sistemaevento.conexion.Conexion;
 import sistemaevento.dtos.ArticuloDTO;
 import sistemaevento.dtos.ClienteDTO;
 import sistemaevento.dtos.TransporteDTO;
+import sistemaevento.dtos.UsuarioDTO;
 import sistemaevento.util.Criteria;
 import sistemaevento.util.GenericoDTO;
 
@@ -156,5 +157,37 @@ public class InventarioDAOImpl implements InventarioDAO {
 		} 
         return articulos;
 	}
+	
+	
+	public List<UsuarioDTO> buscarUsuario(UsuarioDTO articulo) throws SQLException{
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet datos=null;
+		ArrayList<UsuarioDTO> articulos=new ArrayList<UsuarioDTO>();
+		try{
+			conn=(this.userConn!=null)?this.userConn:Conexion.getConnection();
+			stmt=conn.createStatement();
+			Criteria criteria=new Criteria("usuario");
+            criteria.addEqualsIfNotNull("id",articulo.getId());
+			criteria.addLikeIfNotNull("codigo",articulo.getCodigo());
+            criteria.addEqualsIfNotNull("estado",articulo.getEstado()); 
+            datos=stmt.executeQuery(criteria.getQuery());
+            while(datos.next()){
+            	UsuarioDTO temp=new UsuarioDTO();
+                temp.setId(datos.getLong(1));
+                temp.setCodigo(datos.getString(2));
+                temp.setEstado(GenericoDTO.StringToEstado(datos.getString(4)));
+                articulos.add(temp); 
+            }
+		}
+		finally{
+			Conexion.close(stmt);
+			if(this.userConn==null){
+				Conexion.close(conn);
+			}
+		} 
+        return articulos;
+	}
+	
 }
 
