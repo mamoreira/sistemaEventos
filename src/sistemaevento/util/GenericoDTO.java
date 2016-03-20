@@ -13,13 +13,11 @@ import java.util.Date;
 
 import javax.swing.JPanel;
 
-import sistemaevento.util.GenericoDTO.BanderaSiNo;
-
 /**
  *
  * @author Mayra
  */
-public class Generic {
+public class GenericoDTO {
    public static MensajeLbl mensaje;
    public enum BanderaSiNo{
        S ,N ;
@@ -68,6 +66,23 @@ public class Generic {
        }
    }
       
+      public static String SNToString(BanderaSiNo estado){
+          if(estado == BanderaSiNo.S){return "SI";}
+          else{if(estado == BanderaSiNo.N){return "NO";}
+          else {return " ";}
+          }
+      }
+      
+      public static BanderaSiNo StringToSN(String text){
+          if(text.equals("SI") || text.equals("S")){
+              return BanderaSiNo.S;
+          }
+          else if (text.equals("NO") || text.equals("N")){
+                   return BanderaSiNo.N;
+              }
+          return null;
+      }
+      
    public static Long StringToLong(String text){
        if (text.equals(""))
            return null;
@@ -79,14 +94,12 @@ public class Generic {
        return String.valueOf(num); 
    }
       
-   @SuppressWarnings("deprecation")
-public static Date StringToDate(String text){
+   public static Date StringToDate(String text){
        return new Date(text);
    }
    public static String DateToString(Date date){
        if (date != null){
-           @SuppressWarnings("deprecation")
-		String se=date.getDay()+"/"+date.getMonth()+"/"+date.getYear();
+           String se=date.getDay()+"/"+date.getMonth()+"/"+date.getYear();
           return se;
        }else
            return "";
@@ -115,6 +128,16 @@ public static Date StringToDate(String text){
         itemsCombobox.add("--------");
         itemsCombobox.add("ACTIVO");
         itemsCombobox.add("INACTIVO");
+        Combobox comboboxEstado = new Combobox(itemsCombobox.size(), itemsCombobox, 200,26, rutasImagenes);
+        return comboboxEstado;
+    }
+    
+    public static Combobox SNCombobox(){
+    	String[] rutasImagenes ={"/Imagenes/noAplica_icon.png","/Imagenes/activo_icon.png","/Imagenes/inactivo_icon.png"};       
+        ArrayList<String> itemsCombobox = new ArrayList<String>();
+        itemsCombobox.add("--------");
+        itemsCombobox.add("SI");
+        itemsCombobox.add("NO");
         Combobox comboboxEstado = new Combobox(itemsCombobox.size(), itemsCombobox, 200,26, rutasImagenes);
         return comboboxEstado;
     }
@@ -161,30 +184,6 @@ public static Date StringToDate(String text){
         	}
     	return null;
     	}
-    public static String SNToString(BanderaSiNo estado){
-        if(estado == BanderaSiNo.S){return "SI";}
-        else{if(estado == BanderaSiNo.N){return "NO";}
-        else {return " ";}
-        }
-    }
     
-    public static BanderaSiNo StringToSN(String text){
-        if(text.equals("SI") || text.equals("S")){
-            return BanderaSiNo.S;
-        }
-        else if (text.equals("NO") || text.equals("N")){
-                 return BanderaSiNo.N;
-            }
-        return null;
-    }
-    public static Combobox SNCombobox(){
-    	String[] rutasImagenes ={"/Imagenes/noAplica_icon.png","/Imagenes/activo_icon.png","/Imagenes/inactivo_icon.png"};       
-        ArrayList<String> itemsCombobox = new ArrayList<String>();
-        itemsCombobox.add("--------");
-        itemsCombobox.add("SI");
-        itemsCombobox.add("NO");
-        Combobox comboboxEstado = new Combobox(itemsCombobox.size(), itemsCombobox, 200,26, rutasImagenes);
-        return comboboxEstado;
-    }
     
 }

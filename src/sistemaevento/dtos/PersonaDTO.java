@@ -7,7 +7,8 @@
 package sistemaevento.dtos;
 
 import sistemaevento.util.Fecha;
-import sistemaevento.util.Generic;
+import sistemaevento.util.Generic.BanderaSiNo;
+import sistemaevento.util.Generic.Estado;
 
 
 
@@ -26,10 +27,10 @@ public class PersonaDTO extends GenericoDTO{
     private String movil2;
     private String email;
     private Fecha fechaNacimiento;
-    private boolean cliente;
-    private boolean proveedor;
-    private boolean empleado;
-    private Generic.Estado estado;
+    private BanderaSiNo cliente;
+    private BanderaSiNo proveedor;
+    private BanderaSiNo empleado;
+    private Estado estado;
 
     public PersonaDTO (){
     }
@@ -108,11 +109,11 @@ public class PersonaDTO extends GenericoDTO{
         this.nombres = nombres;
     }
 
-    public Generic.Estado getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(Generic.Estado estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -124,28 +125,29 @@ public class PersonaDTO extends GenericoDTO{
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public boolean isCliente() {
-        return cliente;
-    }
+	public BanderaSiNo getCliente() {
+		return cliente;
+	}
 
-    public void setCliente(boolean cliente) {
-        this.cliente = cliente;
-    }
+	public void setCliente(BanderaSiNo cliente) {
+		this.cliente = cliente;
+	}
 
-    public boolean isProveedor() {
-        return proveedor;
-    }
+	public BanderaSiNo getProveedor() {
+		return proveedor;
+	}
 
-    public void setProveedor(boolean proveedor) {
-        this.proveedor = proveedor;
-    }
+	public void setProveedor(BanderaSiNo proveedor) {
+		this.proveedor = proveedor;
+	}
 
-    public boolean isEmpleado() {
-        return empleado;
-    }
+	public BanderaSiNo getEmpleado() {
+		return empleado;
+	}
 
-    public void setEmpleado(boolean empleado) {
-        this.empleado = empleado;
-    }
+	public void setEmpleado(BanderaSiNo empleado) {
+		this.empleado = empleado;
+	}
+
     
 }

@@ -54,9 +54,9 @@ public class UsuarioFRM extends PlantillaFRM {
 		comboboxEstado = Generic.EstadoCombobox();
 		textFieldId=new InputNumber(15);
 		textFieldCodigo=new InputText(10);
-		labelId=new JLabel(         "Id : ");
-		labelCodigo=new JLabel(     "Codigo : ");
-		labelEstado=new JLabel(     "Estado : ");
+		labelId=new JLabel("Id : ");
+		labelCodigo=new JLabel("Codigo : ");
+		labelEstado=new JLabel("Estado : ");
 
     }
 	
