@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import sistemaevento.dtos.ClienteDTO;
 import sistemaevento.plantillas.frame.PlantillaFRM;
 import sistemaevento.util.Combobox;
-import sistemaevento.util.GenericoDTO;
+import sistemaevento.util.Generic;
 import sistemaevento.util.InputNumber;
 import sistemaevento.util.InputText;
 
@@ -50,7 +50,7 @@ public class ClienteFRM extends PlantillaFRM {
 		setMinimumSize(new java.awt.Dimension(1000, 599));
 		ClienteFilter=new ClienteDTO();
 		//****INICIALIZAR COMPONENTES****//
-		comboboxEstado = GenericoDTO.EstadoCombobox();
+		comboboxEstado = Generic.EstadoCombobox();
 		textFieldId=new InputNumber(15);
 		textFieldCedula=new InputNumber(10);
 		textFieldNombres=new InputText(10);
@@ -100,7 +100,7 @@ public class ClienteFRM extends PlantillaFRM {
         ClienteFilter.setCedula(textFieldCedula.getText());
         ClienteFilter.setNombres(textFieldNombres.getText());
         ClienteFilter.setApellidos(textFieldApellidos.getText());
-        ClienteFilter.setEstado(GenericoDTO.StringToEstado(comboboxEstado.getSelectedItem().toString()));
+        ClienteFilter.setEstado(Generic.StringToEstado(comboboxEstado.getSelectedItem().toString()));
         resultados=inventarioG.buscarCliente(ClienteFilter);
         mostrarTablaResultado(resultados);
         
@@ -117,7 +117,7 @@ public class ClienteFRM extends PlantillaFRM {
                 tableResultados.setValueAt(dto.getCedula(),i,1);
                 tableResultados.setValueAt(dto.getNombres(),i,2);
                 tableResultados.setValueAt(dto.getApellidos(),i,3);
-                tableResultados.setValueAt(GenericoDTO.EstadoToString(dto.getEstado()),i,4);
+                tableResultados.setValueAt(Generic.EstadoToString(dto.getEstado()),i,4);
                 filaActual++;
             }else i=21;
         } 

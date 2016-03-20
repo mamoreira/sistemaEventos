@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  *
  * @author Mayra
  */
-public class GenericoDTO {
+public class Generic {
    public static MensajeLbl mensaje;
    public enum BanderaSiNo{
        SI ,NO ;

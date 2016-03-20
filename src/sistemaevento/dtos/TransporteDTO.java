@@ -9,14 +9,12 @@ package sistemaevento.dtos;
 import java.util.ArrayList;
 
 import sistemaevento.util.Combobox;
-import sistemaevento.util.GenericoDTO.Estado;
 
 /**
  *
  * @author Mayra
  */
-public class TransporteDTO {
-    private Long id;
+public class TransporteDTO extends GenericoDTO{
     private String placa;
     private String descripcion;
     private String observacion;

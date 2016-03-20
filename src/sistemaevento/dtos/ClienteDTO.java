@@ -6,17 +6,13 @@
 
 package sistemaevento.dtos;
 
-import java.util.ArrayList;
-
-import sistemaevento.util.Combobox;
-import sistemaevento.util.GenericoDTO.Estado;
+import sistemaevento.util.Generic.Estado;
 
 /**
  *
  * @author Angely
  */
-public class ClienteDTO {
-    private Long id;
+public class ClienteDTO extends GenericoDTO{
     private String cedula;
     private String nombres;
     private String apellidos;
