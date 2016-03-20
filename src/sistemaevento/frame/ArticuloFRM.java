@@ -52,10 +52,10 @@ public class ArticuloFRM extends PlantillaFRM {
 		articuloFilter=new ArticuloDTO();
 		//****INICIALIZAR COMPONENTES****//
 		comboboxEstado = GenericoDTO.EstadoCombobox();
-		textFieldId=new InputNumber(18);
+		textFieldId=new InputNumber(15);
 //		textFieldId.setMaximumSize(new Dimension(5,3));
-		textFieldCodigo=new JTextField(15);
-		textFieldDescripcion=new InputText(15);
+		textFieldCodigo=new JTextField(10);
+		textFieldDescripcion=new InputText(10);
 		labelId=new JLabel(         "Id : ");
 		labelCodigo=new JLabel(     "Codigo : ");
 		labelDescripcion=new JLabel("Descripcion : ");
