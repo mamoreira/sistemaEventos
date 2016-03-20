@@ -15,6 +15,4 @@ public class GenericoDTO {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	
 }

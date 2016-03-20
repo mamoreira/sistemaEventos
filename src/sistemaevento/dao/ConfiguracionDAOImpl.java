@@ -130,6 +130,7 @@ public class ConfiguracionDAOImpl implements ConfiguracionDAO {
 	        	generico.setId(rs.getLong(1));
 	        	generico.setDescripcion(rs.getString(2));
 	            objetos.add(generico);
+
 	        }
 		}
 		finally{

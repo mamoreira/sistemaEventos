@@ -16,6 +16,6 @@ public interface ConfiguracionDAO {
 	public UsuarioDTO obtenerUsuario(UsuarioDTO usuario)throws SQLException;
 
 	public List<GenericoDTO> obtenereListElementos(String metodoAutoBusqueda) throws SQLException;
-	
+
 
 }
