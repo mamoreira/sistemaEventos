@@ -13,17 +13,12 @@ import sistemaevento.util.GenericoDTO.Estado;
 
 /**
  *
- * @author Mayra
+ * @author Angely
  */
 public class RolDTO {
     private Long id;
     private String codigo;
     private String descripcion;
-    private Long stock;
-    private BigDecimal costo;
-    private BigDecimal precioAlquiler;
-    private Long cantidadBuenEstado; 
-    private Long cantidadReparacion;
     private Estado estado;
 
     public RolDTO() {
@@ -51,46 +46,6 @@ public class RolDTO {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Long getStock() {
-        return stock;
-    }
-
-    public void setStock(Long stock) {
-        this.stock = stock;
-    }
-
-    public BigDecimal getCosto() {
-        return costo;
-    }
-
-    public void setCosto(BigDecimal costo) {
-        this.costo = costo;
-    }
-
-    public BigDecimal getPrecioAlquiler() {
-        return precioAlquiler;
-    }
-
-    public void setPrecioAlquiler(BigDecimal precioAlquiler) {
-        this.precioAlquiler = precioAlquiler;
-    }
-
-    public Long getCantidadBuenEstado() {
-        return cantidadBuenEstado;
-    }
-
-    public void setCantidadBuenEstado(Long cantidadBuenEstado) {
-        this.cantidadBuenEstado = cantidadBuenEstado;
-    }
-
-    public Long getCantidadReparacion() {
-        return cantidadReparacion;
-    }
-
-    public void setCantidadReparacion(Long cantidadReparacion) {
-        this.cantidadReparacion = cantidadReparacion;
     }
 
     public Estado getEstado() {
@@ -125,8 +80,6 @@ public class RolDTO {
         return true;
     }
 
-    public boolean validarCampos() {
-        return id!= null && estado !=null && stock!= null &&  codigo != null && descripcion!= null && cantidadBuenEstado != null && cantidadReparacion != null;
-    }
+   
     
 }

@@ -13,7 +13,7 @@ import sistemaevento.util.GenericoDTO.Estado;
 
 /**
  *
- * @author Mayra
+ * @author Angely
  */
 public class ArticuloDTO {
     private Long id;
