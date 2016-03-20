@@ -17,5 +17,7 @@ public interface ConfiguracionDAO {
 	public UsuarioDTO obtenerUsuario(UsuarioDTO usuario)throws SQLException;
 
 	public ArrayList<ArticuloDTO> buscarArticulo(ArticuloDTO articulo);
+	
+	//1 commit
 
 }
