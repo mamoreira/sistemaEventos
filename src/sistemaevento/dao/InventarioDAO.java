@@ -18,6 +18,11 @@ public interface InventarioDAO {
 
 	public List<ClienteDTO> buscarCliente(ClienteDTO clienteFilter) throws SQLException;
 
+<<<<<<< HEAD
+	public void guardarArticulo(ArticuloDTO articulo) throws SQLException;
+
+=======
 	public List<UsuarioDTO> buscarUsuario(UsuarioDTO usuarioFilter) throws SQLException;
+>>>>>>> refs/remotes/origin/master
 
 }

@@ -1,6 +1,7 @@
 package sistemaevento.frame;
 
 import java.awt.GridBagConstraints;
+import java.sql.SQLException;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -9,6 +10,8 @@ import sistemaevento.dtos.ArticuloDTO;
 import sistemaevento.plantillas.frame.PlantillaNavegateFRM;
 import sistemaevento.util.Combobox;
 import sistemaevento.util.GenericoDTO;
+import sistemaevento.util.InputNumber;
+import sistemaevento.util.InputText;
 
 public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 
@@ -19,13 +22,14 @@ public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 	private static final long serialVersionUID = -4785599002381634767L;
 
 	    private ArticuloDTO articulo;
-	    private JTextField textFieldId;
+	    private InputNumber textFieldId;
 	    private JTextField textFieldCodigo;
 	    private JTextField textFieldDescripcion;
-	    private JTextField textFieldStock;
-	    private JTextField textFieldCosto;
-	    private JTextField textFieldPrecioAlquiler;
-	    private JTextField textFieldCantidadReparacion;
+	    private InputNumber textFieldStock;
+	    private InputNumber textFieldCosto;
+	    private InputNumber textFieldPrecioAlquiler;
+	    private InputNumber textFieldCantidadReparacion;
+	    private InputNumber textFieldCantidadBuenEstado;
 	    private Combobox comboboxEstado;
 	    private JLabel labelId;
 	    private JLabel labelCodigo;
@@ -34,6 +38,8 @@ public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 	    private JLabel labelCosto;
 	    private JLabel labelPrecioAlquiler;
 	    private JLabel labelCantidadReparacion;
+	    private JLabel labelCantidadBuenEstado;
+
 	    private JLabel labelEstado;
 	    
 	public ArticuloNavegateFRM(){
@@ -45,16 +51,18 @@ public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 	         //****INICIALIZAR COMPONENTES****//
 	        titulo="Nuevo Articulo";
 	        comboboxEstado = GenericoDTO.EstadoCombobox();
-	        textFieldId=new JTextField(19);
-	        textFieldStock=new JTextField(19);
-	        textFieldCantidadReparacion=new JTextField(19);
-	        textFieldPrecioAlquiler=new JTextField(19);
+	        textFieldId=new InputNumber(19);
+	        textFieldStock=new InputNumber(19);
+	        textFieldCantidadReparacion=new InputNumber(19);
+	        textFieldCantidadBuenEstado=new InputNumber(19);
+	        textFieldPrecioAlquiler=new InputNumber(19);
 	        textFieldCodigo=new JTextField(19);
 	        textFieldDescripcion=new JTextField(19);
-	        textFieldCosto=new JTextField(19);
+	        textFieldCosto=new InputNumber(19);
 	        labelId=new JLabel("Id* : ");
 	        labelStock=new JLabel("Stock* : ");
 	        labelCantidadReparacion=new JLabel("Cant. Reparacion : ");
+	        labelCantidadBuenEstado=new JLabel("Cant. Buen Estado : ");
 	        labelCosto=new JLabel("Costo : ");
 	        labelCodigo=new JLabel("Codigo : ");
 	        labelDescripcion=new JLabel("Descripcion : ");
@@ -67,6 +75,7 @@ public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
 	        nuevoComponente(labelStock,textFieldStock);
 	        nuevoComponente(labelDescripcion,textFieldDescripcion);
 	        nuevoComponente(labelCantidadReparacion,textFieldCantidadReparacion);
+	        nuevoComponente(labelCantidadBuenEstado,textFieldCantidadBuenEstado);
 	        nuevoComponente(labelPrecioAlquiler,textFieldPrecioAlquiler);
 	        nuevoComponente(labelCosto,textFieldCosto);
 	        nuevoComponente(labelEstado,comboboxEstado);	        
@@ -88,6 +97,20 @@ public class ArticuloNavegateFRM extends PlantillaNavegateFRM{
          textFieldId.setEnabled(false);
          textFieldStock.setEnabled(false);
          setVisible(true);
+	}
+	public void accionGuardar() throws SQLException{
+        articulo.setId(textFieldId.getLong());
+        articulo.setStock(textFieldStock.getLong());
+        articulo.setCodigo(textFieldCodigo.getText());
+        articulo.setDescripcion(textFieldDescripcion.getText());
+        articulo.setCosto(textFieldCosto.getBig());
+        articulo.setPrecioAlquiler(textFieldPrecioAlquiler.getBig());
+        articulo.setCantidadReparacion(textFieldCantidadReparacion.getLong());
+        articulo.setCantidadBuenEstado(textFieldCantidadBuenEstado.getLong());
+        articulo.setEstado(GenericoDTO.StringToEstado(comboboxEstado.getSelectedItem().toString()));
+		inventarioG.guardarArticulo(articulo);
+	}
+	public void accionLimpiar(){
 		
 	}
 }

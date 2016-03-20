@@ -1,11 +1,9 @@
 package sistemaevento.util;
 
-import java.text.Format;
-import java.text.NumberFormat;
+import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
 
 import javax.swing.JTextField;
-
-import org.omg.IOP.CodecPackage.FormatMismatch;
 
 public class InputNumber extends JTextField {
 	
@@ -22,12 +20,20 @@ public class InputNumber extends JTextField {
 	  	      }
 	  	  });
 	}
-    private void numerosKeyTyped(java.awt.event.KeyEvent evt) {                                             
-        char c=evt.getKeyChar();
-        if(c<'0' || c>'9') evt.consume();
+    private void numerosKeyTyped(java.awt.event.KeyEvent e) {                                             
+        char caracter=e.getKeyChar();
+        if(((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter !='.')){e.consume();
+        }
+        if (caracter == '.' && this.getText().contains(".")) {
+        	e.consume();
+        	}
     }    
 
     public Long getLong(){
-    	return this.getText().length()>0?Long.parseLong(this.getText().trim()):null;
+    	return this.getText().length()>0?Long.parseLong(this.getText()):null;
+    }
+    public BigDecimal getBig(){
+    	return this.getText().length()>0?new BigDecimal(this.getText()):null;
     }
 }
