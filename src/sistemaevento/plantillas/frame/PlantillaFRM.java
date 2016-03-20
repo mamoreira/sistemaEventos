@@ -3,6 +3,7 @@ package sistemaevento.plantillas.frame;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -12,6 +13,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -251,8 +253,12 @@ protected void inicializaComponentes() {
     
     }
     public void nuevoFiltro(Component componente,JLabel descripcion){
-       panelFiltros.add(descripcion);
- 	   panelFiltros.add(componente);
+    	JPanel panel=new JPanel();
+		panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panel.setSize(100,30);
+		panel.add(descripcion);
+		panel.add(componente);
+ 	   panelFiltros.add(panel);
     }
 	public static void limpiarTabla(JTable tabla){
 
